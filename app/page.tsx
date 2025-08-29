@@ -1,8 +1,8 @@
 import Header from "@/components/header"
 import LandingSection from "@/components/landing-section"
 import AboutSection from "@/components/about-section"
-import PortfolioSection from "@/components/portfolio-section"
 import ProcessSection from "@/components/process-section"
+import PortfolioSection from "@/components/portfolio-section"
 import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
 

@@ -61,7 +61,7 @@ const config: Config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        charcoal: "#293132",
+        charcoal: "#2d3134",
         gold: "#f2b451",
         "gold-brown": "#B89960",
       },

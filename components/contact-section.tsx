@@ -1,116 +1,212 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { Mail, Phone, MapPin } from "lucide-react"
+import type React from "react"
+
+import { useRef, useState } from "react"
+import { motion, useInView } from "framer-motion"
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react"
 
 export default function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(sectionRef, { amount: 0.3 })
+  const [formSubmitted, setFormSubmitted] = useState(false)
 
-  // Add scroll-linked animations
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  })
+  const contactInfo = [
+    {
+      icon: <Mail className="w-6 h-6" />,
+      title: "Email",
+      value: "info@houtcore.nl",
+      description: "Stuur ons een bericht",
+    },
+    {
+      icon: <Phone className="w-6 h-6" />,
+      title: "Telefoon",
+      value: "+31 6 12345678",
+      description: "Bel voor direct contact",
+    },
+    {
+      icon: <MapPin className="w-6 h-6" />,
+      title: "Locatie",
+      value: "Nederland",
+      description: "Werkplaats & Showroom",
+    },
+    {
+      icon: <Clock className="w-6 h-6" />,
+      title: "Openingstijden",
+      value: "Ma-Vr: 8:00-17:00",
+      description: "Weekend op afspraak",
+    },
+  ]
 
-  // Transform values based on scroll position
-  const opacity = useTransform(scrollYProgress, [0.1, 0.2, 0.8, 0.9], [0, 1, 1, 0])
-  const y = useTransform(scrollYProgress, [0.1, 0.2, 0.8, 0.9], [50, 0, 0, -50])
-
-  // Different animations for left and right content
-  // Modified to prevent movement at the end (0.9 value is now 0 instead of -100/100)
-  const leftX = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [-100, 0, 0, 0])
-  const rightX = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [100, 0, 0, 0])
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Simulate form submission
+    setFormSubmitted(true)
+    setTimeout(() => setFormSubmitted(false), 3000)
+  }
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 bg-[#f2b451] text-[#293132]">
-      <div className="container mx-auto px-4">
-        <motion.h2 style={{ opacity, y }} className="text-4xl font-bold mb-12 text-center">
-          Contact
-        </motion.h2>
+    <section id="contact" ref={sectionRef} className="py-24 bg-[#f2b451] text-[#2d3134] relative overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-[url('/wood-texture.jpeg')] bg-repeat"></div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <motion.div style={{ opacity, x: leftX }} className="space-y-8">
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-bold mb-6">Neem Contact Op</h2>
+          <p className="text-xl text-[#2d3134]/80 max-w-2xl mx-auto">
+            Heeft u een project in gedachten? Laten we er samen iets moois van maken.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
             <div>
-              <h3 className="text-2xl font-bold mb-4">Neem contact op</h3>
-              <p className="mb-6">Heeft u een vraag of wilt u een project bespreken? Neem gerust contact met mij op.</p>
+              <h3 className="text-2xl font-bold mb-6">Kom in contact</h3>
+              <p className="text-lg text-[#2d3134]/80 mb-8">
+                Van eerste idee tot eindproduct, ik begeleid u door het hele proces. Neem contact op voor een
+                vrijblijvend gesprek over uw project.
+              </p>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="bg-[#293132] text-white p-3 rounded-full">
-                <Mail size={20} />
-              </div>
-              <div>
-                <h4 className="font-semibold">Email</h4>
-                <p>info@houtcore.nl</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="bg-[#293132] text-white p-3 rounded-full">
-                <Phone size={20} />
-              </div>
-              <div>
-                <h4 className="font-semibold">Telefoon</h4>
-                <p>+31 6 12345678</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="bg-[#293132] text-white p-3 rounded-full">
-                <MapPin size={20} />
-              </div>
-              <div>
-                <h4 className="font-semibold">Locatie</h4>
-                <p>Werkplaats in Nederland</p>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-[#2d3134]/10 hover:bg-white/90 transition-all duration-300 hover:shadow-xl"
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-[#2d3134] text-[#f2b451] p-3 rounded-xl flex-shrink-0">{info.icon}</div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[#2d3134] mb-1">{info.title}</h4>
+                      <p className="text-[#2d3134] font-medium mb-1">{info.value}</p>
+                      <p className="text-[#2d3134]/70 text-sm">{info.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
-          <motion.form style={{ opacity, x: rightX }} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
-                Naam
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="w-full px-4 py-3 rounded-lg border border-[#293132]/20 focus:outline-none focus:ring-2 focus:ring-[#293132]"
-                placeholder="Uw naam"
-              />
-            </div>
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-[#2d3134]/10 shadow-2xl">
+              <h3 className="text-2xl font-bold mb-6 text-[#2d3134]">Stuur een bericht</h3>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="w-full px-4 py-3 rounded-lg border border-[#293132]/20 focus:outline-none focus:ring-2 focus:ring-[#293132]"
-                placeholder="Uw emailadres"
-              />
-            </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                      Naam *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300"
+                      placeholder="Uw naam"
+                    />
+                  </div>
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
-                Bericht
-              </label>
-              <textarea
-                id="message"
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg border border-[#293132]/20 focus:outline-none focus:ring-2 focus:ring-[#293132]"
-                placeholder="Uw bericht"
-              ></textarea>
-            </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300"
+                      placeholder="uw.email@example.com"
+                    />
+                  </div>
+                </div>
 
-            <button
-              type="submit"
-              className="bg-[#293132] text-white py-3 px-6 rounded-lg hover:bg-[#293132]/90 transition-colors duration-300 w-full md:w-auto"
-            >
-              Versturen
-            </button>
-          </motion.form>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                    Telefoon
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300"
+                    placeholder="+31 6 12345678"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="project" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                    Project Type
+                  </label>
+                  <select
+                    id="project"
+                    className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300"
+                  >
+                    <option value="">Selecteer project type</option>
+                    <option value="meubels">Meubels</option>
+                    <option value="kasten">Kasten</option>
+                    <option value="trappen">Trappen</option>
+                    <option value="interieur">Interieur</option>
+                    <option value="overig">Overig</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                    Bericht *
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300 resize-none"
+                    placeholder="Vertel ons over uw project..."
+                  ></textarea>
+                </div>
+
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  disabled={formSubmitted}
+                  className="w-full bg-[#2d3134] text-white py-4 rounded-xl font-semibold hover:bg-[#2d3134]/90 transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 shadow-lg hover:shadow-xl"
+                >
+                  {formSubmitted ? (
+                    <>
+                      <CheckCircle className="w-5 h-5" />
+                      <span>Bericht Verzonden!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      <span>Verstuur Bericht</span>
+                    </>
+                  )}
+                </motion.button>
+              </form>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

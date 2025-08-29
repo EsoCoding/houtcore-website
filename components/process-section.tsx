@@ -1,22 +1,12 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useTransform, useInView } from "framer-motion"
-import { Pencil, PenToolIcon as Tools, Home, CheckCircle } from "lucide-react"
+import { motion, useInView } from "framer-motion"
+import { Pencil, Torus as Tools, Home, CheckCircle } from "lucide-react"
 
 export default function ProcessSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { amount: 0.2 })
-
-  // Add scroll-linked animations
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  })
-
-  // Transform values based on scroll position
-  const opacity = useTransform(scrollYProgress, [0.1, 0.2, 0.8, 0.9], [0, 1, 1, 0])
-  const y = useTransform(scrollYProgress, [0.1, 0.2, 0.8, 0.9], [50, 0, 0, -50])
 
   const steps = [
     {
@@ -24,104 +14,111 @@ export default function ProcessSection() {
       title: "Ontwerp & Overleg",
       content:
         "Samen met de klant verken ik de mogelijkheden om ideeën om te zetten in schetsen en uiteindelijk in een prachtig werkstuk.",
+      color: "bg-[#f2b451]",
     },
     {
       icon: <Tools size={32} />,
       title: "Productie",
       content:
         "Na goedkeuring begin ik met het ontwerpen en produceren van het project, waarbij de klant duidelijk ziet hoe het eindproduct eruit komt te zien.",
+      color: "bg-[#B89960]",
     },
     {
       icon: <Home size={32} />,
       title: "Montage & Plaatsing",
       content:
         "Het project wordt in de werkplaats voorbereid en vervolgens op locatie gemonteerd, als prachtige toevoeging aan de bestaande omgeving.",
+      color: "bg-[#2d3134]",
     },
     {
       icon: <CheckCircle size={32} />,
       title: "Afwerking & Oplevering",
       content:
         "Met een hoogwaardige afwerking volgens de wensen van de klant komen we bij de oplevering. Tevredenheid en garantie staan voorop.",
+      color: "bg-[#f2b451]",
     },
   ]
 
   return (
-    <section id="process" ref={sectionRef} className="py-20 bg-[#f2b451] text-[#293132] relative overflow-hidden">
+    <section id="process" ref={sectionRef} className="py-24 bg-[#f2b451] text-[#2d3134] relative overflow-hidden">
       {/* Background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-[url('/wood-texture.jpeg')] bg-repeat opacity-10"></div>
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-[url('/wood-texture.jpeg')] bg-repeat"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative">
-        <motion.h2 style={{ opacity, y }} className="text-4xl font-bold mb-16 text-center">
-          <span className="text-[#293132]">Werkwijze</span>
-        </motion.h2>
-
-        <motion.div style={{ opacity, y }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <ProcessCard key={index} step={step} index={index} scrollYProgress={scrollYProgress} />
-          ))}
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-bold mb-6 text-[#2d3134]">Onze Werkwijze</h2>
+          <p className="text-xl text-[#2d3134]/80 max-w-2xl mx-auto">
+            Van eerste schets tot eindproduct, elke stap wordt met zorg uitgevoerd
+          </p>
         </motion.div>
 
-        {/* Process flow arrows - only visible on desktop */}
-        <div className="hidden lg:block">
-          {[0, 1, 2].map((index) => (
-            <motion.div
-              key={index}
-              className="absolute top-1/2 transform -translate-y-1/2"
-              style={{
-                left: `calc(25% * ${index + 1} - 1.5rem)`,
-                opacity: useTransform(scrollYProgress, [0.3, 0.4, 0.7, 0.8], [0, 1, 1, 0]),
-                scale: useTransform(scrollYProgress, [0.3, 0.4, 0.7, 0.8], [0.5, 1, 1, 0.5]),
-              }}
-            >
-              <div className="text-[#293132] text-4xl">→</div>
-            </motion.div>
+        {/* Process steps */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {steps.map((step, index) => (
+            <ProcessCard key={index} step={step} index={index} isInView={isInView} />
           ))}
+        </div>
+
+        {/* Process flow - desktop only */}
+        <div className="hidden lg:block relative">
+          <div className="absolute top-1/2 left-0 right-0 h-1 bg-[#2d3134]/20 transform -translate-y-1/2"></div>
+          <motion.div
+            initial={{ width: "0%" }}
+            animate={isInView ? { width: "100%" } : { width: "0%" }}
+            transition={{ delay: 1, duration: 2, ease: "easeInOut" }}
+            className="absolute top-1/2 left-0 h-1 bg-[#2d3134] transform -translate-y-1/2"
+          ></motion.div>
         </div>
       </div>
     </section>
   )
 }
 
-function ProcessCard({ step, index, scrollYProgress }) {
-  // Card animation variants based on scroll position
-  const delay = index * 0.1
-
-  // Define cardOpacity and cardY here, outside of the return statement
-  const cardOpacity = useTransform(scrollYProgress, [0.1 + delay, 0.2 + delay, 0.7 + delay, 0.8 + delay], [0, 1, 1, 0])
-
-  const cardY = useTransform(scrollYProgress, [0.1 + delay, 0.2 + delay, 0.7 + delay, 0.8 + delay], [50, 0, 0, -50])
-
-  const buttonOpacity = useTransform(scrollYProgress, [0.2 + delay, 0.3 + delay], [0, 1])
-
+function ProcessCard({ step, index, isInView }) {
   return (
     <motion.div
-      style={{ opacity: cardOpacity, y: cardY }}
-      className="bg-white/90 backdrop-blur-sm p-6 rounded-lg border border-[#293132]/20 shadow-xl h-full flex flex-col"
-      whileHover={{
-        scale: 1.03,
-        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)",
-        borderColor: "rgba(45, 49, 52, 0.5)",
-      }}
-      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0, y: 100 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+      transition={{ delay: index * 0.2, duration: 0.8, ease: "easeOut" }}
+      className="relative"
     >
-      <div className="flex items-center mb-6">
-        <div className="bg-[#293132] text-white p-3 rounded-full mr-4 flex-shrink-0">{step.icon}</div>
-        <div className="flex flex-col">
-          <span className="text-[#293132]/70 text-sm font-semibold">STAP {index + 1}</span>
-          <h3 className="text-xl font-bold text-[#293132]">{step.title}</h3>
+      {/* Card */}
+      <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-[#2d3134]/10 shadow-xl h-full flex flex-col group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+        {/* Step number */}
+        <div className="absolute -top-4 left-8 bg-[#2d3134] text-white text-sm font-bold px-3 py-1 rounded-full">
+          {String(index + 1).padStart(2, "0")}
         </div>
-      </div>
 
-      <p className="text-[#293132]/80 leading-relaxed flex-grow">{step.content}</p>
+        {/* Icon */}
+        <div className="flex items-center mb-6">
+          <div
+            className={`${step.color} text-white p-4 rounded-xl mr-4 flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
+          >
+            {step.icon}
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-[#2d3134] group-hover:text-[#2d3134]/80 transition-colors duration-300">
+              {step.title}
+            </h3>
+          </div>
+        </div>
 
-      <motion.div className="mt-6 pt-4 border-t border-[#293132]/20" style={{ opacity: buttonOpacity }}>
-        <button className="text-[#293132] hover:text-[#293132]/70 transition-colors duration-300 text-sm font-medium flex items-center">
-          Lees meer
+        {/* Content */}
+        <p className="text-[#2d3134]/80 leading-relaxed flex-grow mb-6">{step.content}</p>
+
+        {/* CTA */}
+        <button className="text-[#2d3134] hover:text-[#2d3134]/70 transition-colors duration-300 text-sm font-medium flex items-center self-start opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          Meer informatie
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 ml-1"
+            className="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -129,7 +126,7 @@ function ProcessCard({ step, index, scrollYProgress }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
-      </motion.div>
+      </div>
     </motion.div>
   )
 }
