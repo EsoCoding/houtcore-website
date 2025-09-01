@@ -8,9 +8,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const socialLinks = [
-    { icon: <Instagram className="w-5 h-5" />, href: "#", label: "Instagram" },
-    { icon: <Facebook className="w-5 h-5" />, href: "#", label: "Facebook" },
-    { icon: <Linkedin className="w-5 h-5" />, href: "#", label: "LinkedIn" },
+    { icon: <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />, href: "#", label: "Instagram" },
+    { icon: <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />, href: "#", label: "Facebook" },
+    { icon: <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />, href: "#", label: "LinkedIn" },
   ]
 
   const quickLinks = [
@@ -52,57 +52,57 @@ export default function Footer() {
 
       <div className="relative z-10">
         {/* Main footer content */}
-        <div className="container mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="container mx-auto px-4 sm:px-6 py-12 lg:py-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Company Info */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-1"
+              transition={{ duration: 0.4 }}
+              className="sm:col-span-2 lg:col-span-1"
             >
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 relative">
+              <div className="flex items-center space-x-3 mb-4 lg:mb-6">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 relative">
                   <Image src="/logo.png" alt="Houtcore Logo" fill className="object-contain" />
                 </div>
-                <span className="text-[#B89960] text-2xl font-bold">Houtcore</span>
+                <span className="text-[#B89960] text-xl lg:text-2xl font-bold">Houtcore</span>
               </div>
 
-              <p className="text-gray-300 mb-6 leading-relaxed">
+              <p className="text-gray-300 mb-4 lg:mb-6 leading-relaxed text-sm lg:text-base">
                 Ambachtelijk maatwerk in hout. Van eerste schets tot eindproduct, wij maken uw dromen werkelijkheid met
                 vakmanschap en passie.
               </p>
 
               {/* Contact Info */}
-              <div className="space-y-3">
+              <div className="space-y-2 lg:space-y-3">
                 <div className="flex items-center space-x-3">
-                  <Mail className="w-4 h-4 text-[#f2b451]" />
-                  <span className="text-gray-300">info@houtcore.nl</span>
+                  <Mail className="w-4 h-4 text-[#EEB457] flex-shrink-0" />
+                  <span className="text-gray-300 text-sm lg:text-base">info@houtcore.nl</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Phone className="w-4 h-4 text-[#f2b451]" />
-                  <span className="text-gray-300">+31 6 12345678</span>
+                  <Phone className="w-4 h-4 text-[#EEB457] flex-shrink-0" />
+                  <span className="text-gray-300 text-sm lg:text-base">+31 6 12345678</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MapPin className="w-4 h-4 text-[#f2b451]" />
-                  <span className="text-gray-300">Nederland</span>
+                  <MapPin className="w-4 h-4 text-[#EEB457] flex-shrink-0" />
+                  <span className="text-gray-300 text-sm lg:text-base">Nederland</span>
                 </div>
               </div>
             </motion.div>
 
             {/* Quick Links */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6 }}
+              transition={{ delay: 0.1, duration: 0.4 }}
             >
-              <h3 className="text-[#B89960] text-lg font-bold mb-6">Navigatie</h3>
-              <ul className="space-y-3">
+              <h3 className="text-[#B89960] text-base lg:text-lg font-bold mb-4 lg:mb-6">Navigatie</h3>
+              <ul className="space-y-2 lg:space-y-3">
                 {quickLinks.map((link, index) => (
                   <li key={index}>
                     <button
                       onClick={() => scrollToSection(link.href)}
-                      className="text-gray-300 hover:text-[#f2b451] transition-colors duration-300 text-left"
+                      className="text-gray-300 hover:text-[#EEB457] transition-colors duration-200 text-left text-sm lg:text-base"
                     >
                       {link.name}
                     </button>
@@ -113,14 +113,14 @@ export default function Footer() {
 
             {/* Services */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
             >
-              <h3 className="text-[#B89960] text-lg font-bold mb-6">Diensten</h3>
-              <ul className="space-y-3">
+              <h3 className="text-[#B89960] text-base lg:text-lg font-bold mb-4 lg:mb-6">Diensten</h3>
+              <ul className="space-y-2 lg:space-y-3">
                 {services.map((service, index) => (
-                  <li key={index} className="text-gray-300 text-sm">
+                  <li key={index} className="text-gray-300 text-xs lg:text-sm">
                     {service}
                   </li>
                 ))}
@@ -129,23 +129,25 @@ export default function Footer() {
 
             {/* Newsletter & Social */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ delay: 0.3, duration: 0.4 }}
             >
-              <h3 className="text-[#B89960] text-lg font-bold mb-6">Blijf op de hoogte</h3>
+              <h3 className="text-[#B89960] text-base lg:text-lg font-bold mb-4 lg:mb-6">Blijf op de hoogte</h3>
 
-              <p className="text-gray-300 mb-4 text-sm">Ontvang updates over nieuwe projecten en inspiratie</p>
+              <p className="text-gray-300 mb-4 text-xs lg:text-sm">
+                Ontvang updates over nieuwe projecten en inspiratie
+              </p>
 
               {/* Newsletter signup */}
-              <div className="mb-6">
+              <div className="mb-4 lg:mb-6">
                 <div className="flex">
                   <input
                     type="email"
                     placeholder="Uw email"
-                    className="flex-1 px-4 py-2 rounded-l-lg border-0 bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f2b451]"
+                    className="flex-1 px-3 lg:px-4 py-2 rounded-l-lg border-0 bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#EEB457] text-sm lg:text-base"
                   />
-                  <button className="bg-[#f2b451] text-[#2d3134] px-4 py-2 rounded-r-lg hover:bg-[#f2b451]/90 transition-colors duration-300 font-medium">
+                  <button className="bg-[#EEB457] text-[#2d3134] px-3 lg:px-4 py-2 rounded-r-lg hover:bg-[#EEB457]/90 transition-colors duration-200 font-medium text-sm lg:text-base">
                     →
                   </button>
                 </div>
@@ -153,15 +155,15 @@ export default function Footer() {
 
               {/* Social Links */}
               <div>
-                <p className="text-gray-300 mb-4 text-sm">Volg ons op social media</p>
-                <div className="flex space-x-3">
+                <p className="text-gray-300 mb-3 lg:mb-4 text-xs lg:text-sm">Volg ons op social media</p>
+                <div className="flex space-x-2 lg:space-x-3">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={index}
                       href={social.href}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="bg-white/10 hover:bg-[#f2b451] text-white hover:text-[#2d3134] p-3 rounded-full transition-all duration-300"
+                      className="bg-white/10 hover:bg-[#EEB457] text-white hover:text-[#2d3134] p-2 lg:p-3 rounded-full transition-all duration-200"
                       aria-label={social.label}
                     >
                       {social.icon}
@@ -177,22 +179,28 @@ export default function Footer() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="border-t border-[#B89960]/20 py-6"
+          transition={{ delay: 0.4, duration: 0.4 }}
+          className="border-t border-[#B89960]/20 py-4 lg:py-6"
         >
-          <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <p className="text-gray-400 text-sm">© {currentYear} Houtcore. Alle rechten voorbehouden.</p>
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
+              <p className="text-gray-400 text-xs lg:text-sm text-center sm:text-left">
+                © {currentYear} Houtcore. Alle rechten voorbehouden.
+              </p>
 
-              <div className="flex items-center space-x-6 text-sm">
-                <button className="text-gray-400 hover:text-[#f2b451] transition-colors duration-300">
-                  Privacy Beleid
-                </button>
-                <button className="text-gray-400 hover:text-[#f2b451] transition-colors duration-300">
-                  Algemene Voorwaarden
-                </button>
-                <span className="text-gray-500">|</span>
-                <span className="text-gray-400">Gemaakt met ❤️ voor vakmanschap</span>
+              <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 lg:space-x-6 text-xs lg:text-sm">
+                <div className="flex items-center space-x-4 lg:space-x-6">
+                  <button className="text-gray-400 hover:text-[#EEB457] transition-colors duration-200">
+                    Privacy Beleid
+                  </button>
+                  <button className="text-gray-400 hover:text-[#EEB457] transition-colors duration-200">
+                    Algemene Voorwaarden
+                  </button>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-500 hidden sm:inline">|</span>
+                  <span className="text-gray-400">Gemaakt met ❤️ voor vakmanschap</span>
+                </div>
               </div>
             </div>
           </div>

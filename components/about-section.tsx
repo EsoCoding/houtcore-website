@@ -6,62 +6,66 @@ import Image from "next/image"
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.3 })
+  const isInView = useInView(sectionRef, { amount: 0.2 })
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 bg-[#2d3134] text-white relative overflow-hidden">
+    <section
+      id="about"
+      ref={sectionRef}
+      className="py-12 sm:py-16 lg:py-20 bg-[#2d3134] text-white relative overflow-hidden"
+    >
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('/wood-texture.jpeg')] bg-repeat"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
-          {/* Reduced header spacing */}
+          {/* Header */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 1 }}
-            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12 lg:mb-16"
           >
             <div className="inline-block">
-              <h2 className="text-5xl md:text-6xl font-light mb-4 text-[#B89960] tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 text-[#B89960] tracking-tight">
                 Over <span className="font-bold">Houtcore</span>
               </h2>
-              <div className="w-24 h-1 bg-[#f2b451] mx-auto"></div>
+              <div className="w-16 sm:w-24 h-1 bg-[#EEB457] mx-auto"></div>
             </div>
           </motion.div>
 
-          {/* Reduced spacing between sections */}
-          <div className="grid grid-cols-12 gap-8 items-center mb-20">
-            {/* Large image taking more space */}
+          {/* Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center mb-12 lg:mb-20">
+            {/* Image */}
             <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="col-span-12 lg:col-span-7"
+              initial={{ opacity: 0, x: -50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="lg:col-span-7"
             >
               <div className="relative">
-                <div className="relative h-[450px] rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative h-64 sm:h-80 lg:h-96 xl:h-[450px] rounded-xl lg:rounded-2xl overflow-hidden shadow-2xl">
                   <Image src="/woodworking-workshop.png" alt="Mijn werkplaats" fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                 </div>
-
-                {/* Floating element */}
               </div>
             </motion.div>
 
-            {/* Content with reduced padding */}
+            {/* Content */}
             <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="col-span-12 lg:col-span-5"
+              initial={{ opacity: 0, x: 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="lg:col-span-5"
             >
-              <div className="lg:pl-8">
-                <h3 className="text-2xl font-light mb-6 text-[#f2b451]">De man achter het ambacht</h3>
+              <div className="lg:pl-6 xl:pl-8">
+                <h3 className="text-xl sm:text-2xl font-light mb-4 lg:mb-6 text-[#EEB457]">
+                  De man achter het ambacht
+                </h3>
 
-                <div className="space-y-5 text-lg leading-relaxed text-gray-300 font-light">
+                <div className="space-y-4 lg:space-y-5 text-base sm:text-lg leading-relaxed text-gray-300 font-light">
                   <p>
                     Van jongs af aan had ik een voorliefde voor het maken van dingen. In 2008 gaf ik daar richting aan
                     met een meubelmakeropleiding.
@@ -78,16 +82,16 @@ export default function AboutSection() {
                   </p>
                 </div>
 
-                <div className="pt-6 border-t border-[#B89960]/30 mt-7">
+                <div className="pt-4 lg:pt-6 border-t border-[#B89960]/30 mt-5 lg:mt-7">
                   <motion.a
                     href="/story"
-                    className="inline-flex items-center space-x-3 text-[#f2b451] font-medium text-lg hover:text-[#B89960] transition-colors duration-300 group"
+                    className="inline-flex items-center space-x-2 lg:space-x-3 text-[#EEB457] font-medium text-base lg:text-lg hover:text-[#B89960] transition-colors duration-200 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <span>Lees mijn volledige verhaal</span>
-                    <motion.div className="group-hover:translate-x-1 transition-transform duration-300">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <motion.div className="group-hover:translate-x-1 transition-transform duration-200">
+                      <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -102,34 +106,40 @@ export default function AboutSection() {
             </motion.div>
           </div>
 
-          {/* Reduced stats section padding */}
+          {/* Stats Section */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ delay: 0.5, duration: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
             className="relative"
           >
-            <div className="bg-gradient-to-r from-[#f2b451]/5 via-[#B89960]/5 to-[#f2b451]/5 rounded-3xl p-12 border border-[#B89960]/20">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div className="bg-gradient-to-r from-[#EEB457]/5 via-[#B89960]/5 to-[#EEB457]/5 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12 border border-[#B89960]/20">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12 text-center">
                 <div className="group">
-                  <div className="text-5xl font-light text-[#f2b451] mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#EEB457] mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
                     15+
                   </div>
-                  <div className="text-lg text-gray-300 font-light uppercase tracking-wider">Jaar Ervaring</div>
+                  <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">
+                    Jaar Ervaring
+                  </div>
                 </div>
 
                 <div className="group">
-                  <div className="text-5xl font-light text-[#B89960] mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#B89960] mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
                     100%
                   </div>
-                  <div className="text-lg text-gray-300 font-light uppercase tracking-wider">Maatwerk</div>
+                  <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">
+                    Maatwerk
+                  </div>
                 </div>
 
                 <div className="group">
-                  <div className="text-5xl font-light text-[#f2b451] mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#EEB457] mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
                     ∞
                   </div>
-                  <div className="text-lg text-gray-300 font-light uppercase tracking-wider">Mogelijkheden</div>
+                  <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">
+                    Mogelijkheden
+                  </div>
                 </div>
               </div>
             </div>
