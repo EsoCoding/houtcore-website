@@ -10,10 +10,17 @@ export default function StoryPage() {
     <main className="min-h-screen bg-houtcore-charcoal text-white">
       {/* Header with back button */}
       <div className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-8 lg:pb-12">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: window.innerWidth < 768 ? 0.8 : 0.4,
+            ease: "easeOut",
+          }}
+        >
           <Link
             href="/"
-            className="inline-flex items-center space-x-2 text-houtcore-gold hover:text-houtcore-brown transition-colors duration-200 mb-6 lg:mb-8"
+            className="inline-flex items-center space-x-2 text-houtcore-gold hover:text-houtcore-brown transition-colors duration-400 mb-6 lg:mb-8"
           >
             <ArrowLeft className="w-4 h-4 lg:w-5 lg:h-5" />
             <span className="text-sm lg:text-base">Terug naar home</span>
@@ -24,7 +31,10 @@ export default function StoryPage() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{
+            duration: window.innerWidth < 768 ? 0.9 : 0.5,
+            ease: "easeOut",
+          }}
           className="text-center mb-12 lg:mb-16"
         >
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 lg:mb-6 text-houtcore-brown tracking-tight">
@@ -46,7 +56,10 @@ export default function StoryPage() {
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{
+                duration: window.innerWidth < 768 ? 0.8 : 0.5,
+                ease: "easeOut",
+              }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
             >
               <div>
@@ -76,7 +89,10 @@ export default function StoryPage() {
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{
+                duration: window.innerWidth < 768 ? 0.8 : 0.5,
+                ease: "easeOut",
+              }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
             >
               <div className="lg:order-2">
@@ -105,7 +121,10 @@ export default function StoryPage() {
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{
+                duration: window.innerWidth < 768 ? 0.8 : 0.5,
+                ease: "easeOut",
+              }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
             >
               <div>
@@ -134,7 +153,10 @@ export default function StoryPage() {
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{
+                duration: window.innerWidth < 768 ? 0.8 : 0.5,
+                ease: "easeOut",
+              }}
               className="text-center bg-gradient-to-r from-houtcore-gold/5 via-houtcore-brown/5 to-houtcore-gold/5 rounded-2xl lg:rounded-3xl p-8 lg:p-12 border border-houtcore-brown/20"
             >
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-houtcore-brown mb-6 lg:mb-8">
@@ -164,12 +186,15 @@ export default function StoryPage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{
+              duration: window.innerWidth < 768 ? 0.8 : 0.5,
+              ease: "easeOut",
+            }}
             className="text-center mt-12 lg:mt-16"
           >
             <Link
               href="/#contact"
-              className="inline-flex items-center space-x-2 lg:space-x-3 bg-houtcore-gold text-houtcore-charcoal px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 shadow-xl text-sm lg:text-base"
+              className="inline-flex items-center space-x-2 lg:space-x-3 bg-houtcore-gold text-houtcore-charcoal px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-400 shadow-xl text-sm lg:text-base"
             >
               <span>Laten we jouw verhaal maken</span>
               <ArrowLeft className="w-4 h-4 lg:w-5 lg:h-5 rotate-180" />

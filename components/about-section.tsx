@@ -8,6 +8,10 @@ export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { amount: 0.2 })
 
+  // Mobile-specific animation durations
+  const mobileAnimationDuration = 0.8
+  const desktopAnimationDuration = 0.5
+
   return (
     <section
       id="about"
@@ -25,7 +29,10 @@ export default function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.5 }}
+            transition={{
+              duration: window.innerWidth < 768 ? mobileAnimationDuration : desktopAnimationDuration,
+              ease: "easeOut",
+            }}
             className="text-center mb-12 lg:mb-16"
           >
             <div className="inline-block">
@@ -42,7 +49,11 @@ export default function AboutSection() {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{
+                duration: window.innerWidth < 768 ? mobileAnimationDuration + 0.2 : desktopAnimationDuration + 0.1,
+                ease: "easeOut",
+                delay: window.innerWidth < 768 ? 0.2 : 0.1,
+              }}
               className="lg:col-span-7"
             >
               <div className="relative">
@@ -57,7 +68,11 @@ export default function AboutSection() {
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{
+                duration: window.innerWidth < 768 ? mobileAnimationDuration + 0.2 : desktopAnimationDuration + 0.1,
+                ease: "easeOut",
+                delay: window.innerWidth < 768 ? 0.4 : 0.2,
+              }}
               className="lg:col-span-5"
             >
               <div className="lg:pl-6 xl:pl-8">
@@ -85,12 +100,13 @@ export default function AboutSection() {
                 <div className="pt-4 lg:pt-6 border-t border-houtcore-brown/30 mt-5 lg:mt-7">
                   <motion.a
                     href="/story"
-                    className="inline-flex items-center space-x-2 lg:space-x-3 text-houtcore-gold font-medium text-base lg:text-lg hover:text-houtcore-brown transition-colors duration-200 group"
+                    className="inline-flex items-center space-x-2 lg:space-x-3 text-houtcore-gold font-medium text-base lg:text-lg hover:text-houtcore-brown transition-colors duration-400 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <span>Lees mijn volledige verhaal</span>
-                    <motion.div className="group-hover:translate-x-1 transition-transform duration-200">
+                    <motion.div className="group-hover:translate-x-1 transition-transform duration-400">
                       <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path
                           strokeLinecap="round"
@@ -110,13 +126,17 @@ export default function AboutSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            transition={{
+              delay: window.innerWidth < 768 ? 0.6 : 0.3,
+              duration: window.innerWidth < 768 ? mobileAnimationDuration : desktopAnimationDuration,
+              ease: "easeOut",
+            }}
             className="relative"
           >
             <div className="bg-gradient-to-r from-houtcore-gold/5 via-houtcore-brown/5 to-houtcore-gold/5 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12 border border-houtcore-brown/20">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12 text-center">
                 <div className="group">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-gold mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-gold mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-500">
                     15+
                   </div>
                   <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">
@@ -125,7 +145,7 @@ export default function AboutSection() {
                 </div>
 
                 <div className="group">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-brown mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-brown mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-500">
                     100%
                   </div>
                   <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">
@@ -134,7 +154,7 @@ export default function AboutSection() {
                 </div>
 
                 <div className="group">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-gold mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-gold mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-500">
                     ∞
                   </div>
                   <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">

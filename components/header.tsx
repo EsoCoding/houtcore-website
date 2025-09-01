@@ -65,7 +65,7 @@ export default function Header() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-white hover:text-houtcore-gold transition-colors duration-200 font-medium text-sm xl:text-base"
+                className="text-white hover:text-houtcore-gold transition-colors duration-300 font-medium text-sm xl:text-base"
               >
                 {item.name}
               </button>
@@ -73,7 +73,7 @@ export default function Header() {
 
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-houtcore-gold text-houtcore-charcoal px-4 xl:px-6 py-2 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 text-sm xl:text-base"
+              className="bg-houtcore-gold text-houtcore-charcoal px-4 xl:px-6 py-2 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-300 text-sm xl:text-base"
             >
               Offerte Aanvragen
             </button>
@@ -95,14 +95,14 @@ export default function Header() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-white hover:text-houtcore-gold transition-colors duration-200 text-left py-2 font-medium"
+                  className="text-white hover:text-houtcore-gold transition-colors duration-400 text-left py-2 font-medium"
                 >
                   {item.name}
                 </button>
               ))}
               <button
                 onClick={() => scrollToSection("contact")}
-                className="bg-houtcore-gold text-houtcore-charcoal px-6 py-3 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 text-center mt-2"
+                className="bg-houtcore-gold text-houtcore-charcoal px-6 py-3 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-400 text-center mt-2"
               >
                 Offerte Aanvragen
               </button>

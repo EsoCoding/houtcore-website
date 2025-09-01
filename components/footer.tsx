@@ -58,7 +58,10 @@ export default function Footer() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{
+                duration: window.innerWidth < 768 ? 0.8 : 0.4,
+                ease: "easeOut",
+              }}
               className="sm:col-span-2 lg:col-span-1"
             >
               <div className="flex items-center space-x-3 mb-4 lg:mb-6">
@@ -94,7 +97,11 @@ export default function Footer() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.4 }}
+              transition={{
+                delay: window.innerWidth < 768 ? 0.2 : 0.1,
+                duration: window.innerWidth < 768 ? 0.8 : 0.4,
+                ease: "easeOut",
+              }}
             >
               <h3 className="text-houtcore-brown text-base lg:text-lg font-bold mb-4 lg:mb-6">Navigatie</h3>
               <ul className="space-y-2 lg:space-y-3">
@@ -102,7 +109,7 @@ export default function Footer() {
                   <li key={index}>
                     <button
                       onClick={() => scrollToSection(link.href)}
-                      className="text-gray-300 hover:text-houtcore-gold transition-colors duration-200 text-left text-sm lg:text-base"
+                      className="text-gray-300 hover:text-houtcore-gold transition-colors duration-400 text-left text-sm lg:text-base"
                     >
                       {link.name}
                     </button>
@@ -115,7 +122,11 @@ export default function Footer() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.4 }}
+              transition={{
+                delay: window.innerWidth < 768 ? 0.4 : 0.2,
+                duration: window.innerWidth < 768 ? 0.8 : 0.4,
+                ease: "easeOut",
+              }}
             >
               <h3 className="text-houtcore-brown text-base lg:text-lg font-bold mb-4 lg:mb-6">Diensten</h3>
               <ul className="space-y-2 lg:space-y-3">
@@ -131,7 +142,11 @@ export default function Footer() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
+              transition={{
+                delay: window.innerWidth < 768 ? 0.6 : 0.3,
+                duration: window.innerWidth < 768 ? 0.8 : 0.4,
+                ease: "easeOut",
+              }}
             >
               <h3 className="text-houtcore-brown text-base lg:text-lg font-bold mb-4 lg:mb-6">Blijf op de hoogte</h3>
 
@@ -145,9 +160,9 @@ export default function Footer() {
                   <input
                     type="email"
                     placeholder="Uw email"
-                    className="flex-1 px-3 lg:px-4 py-2 rounded-l-lg border-0 bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-houtcore-gold text-sm lg:text-base"
+                    className="flex-1 px-3 lg:px-4 py-2 rounded-l-lg border-0 bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-houtcore-gold text-sm lg:text-base transition-all duration-400"
                   />
-                  <button className="bg-houtcore-gold text-houtcore-charcoal px-3 lg:px-4 py-2 rounded-r-lg hover:bg-houtcore-gold/90 transition-colors duration-200 font-medium text-sm lg:text-base">
+                  <button className="bg-houtcore-gold text-houtcore-charcoal px-3 lg:px-4 py-2 rounded-r-lg hover:bg-houtcore-gold/90 transition-colors duration-400 font-medium text-sm lg:text-base">
                     →
                   </button>
                 </div>
@@ -163,7 +178,8 @@ export default function Footer() {
                       href={social.href}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="bg-white/10 hover:bg-houtcore-gold text-white hover:text-houtcore-charcoal p-2 lg:p-3 rounded-full transition-all duration-200"
+                      transition={{ duration: 0.3 }}
+                      className="bg-white/10 hover:bg-houtcore-gold text-white hover:text-houtcore-charcoal p-2 lg:p-3 rounded-full transition-all duration-400"
                       aria-label={social.label}
                     >
                       {social.icon}
@@ -179,7 +195,11 @@ export default function Footer() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.4 }}
+          transition={{
+            delay: window.innerWidth < 768 ? 0.8 : 0.4,
+            duration: window.innerWidth < 768 ? 0.8 : 0.4,
+            ease: "easeOut",
+          }}
           className="border-t border-houtcore-brown/20 py-4 lg:py-6"
         >
           <div className="container mx-auto px-4 sm:px-6">
@@ -190,10 +210,10 @@ export default function Footer() {
 
               <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 lg:space-x-6 text-xs lg:text-sm">
                 <div className="flex items-center space-x-4 lg:space-x-6">
-                  <button className="text-gray-400 hover:text-houtcore-gold transition-colors duration-200">
+                  <button className="text-gray-400 hover:text-houtcore-gold transition-colors duration-400">
                     Privacy Beleid
                   </button>
-                  <button className="text-gray-400 hover:text-houtcore-gold transition-colors duration-200">
+                  <button className="text-gray-400 hover:text-houtcore-gold transition-colors duration-400">
                     Algemene Voorwaarden
                   </button>
                 </div>

@@ -90,7 +90,10 @@ export default function PortfolioSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.5 }}
+          transition={{
+            duration: window.innerWidth < 768 ? 0.8 : 0.5,
+            ease: "easeOut",
+          }}
           className="text-center mb-12 lg:mb-20"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 text-houtcore-gold">Ons Portfolio</h2>
@@ -131,10 +134,14 @@ export default function PortfolioSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{
+            delay: window.innerWidth < 768 ? 0.4 : 0.3,
+            duration: window.innerWidth < 768 ? 0.8 : 0.5,
+            ease: "easeOut",
+          }}
           className="text-center mt-12 lg:mt-20"
         >
-          <button className="bg-houtcore-gold text-houtcore-charcoal px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 hover:shadow-xl inline-flex items-center justify-center space-x-2 text-sm lg:text-base">
+          <button className="bg-houtcore-gold text-houtcore-charcoal px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-400 hover:shadow-xl inline-flex items-center justify-center space-x-2 text-sm lg:text-base">
             <span>Bekijk Alle Projecten</span>
             <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
           </button>
@@ -155,8 +162,12 @@ function MobilePortfolioCard({ item, index }) {
       ref={cardRef}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      className="bg-houtcore-brown/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-houtcore-brown/20 shadow-xl hover:shadow-2xl transition-all duration-300"
+      transition={{
+        delay: index * 0.15, // Slower stagger for mobile
+        duration: 0.8, // Longer duration for mobile
+        ease: "easeOut",
+      }}
+      className="bg-houtcore-brown/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-houtcore-brown/20 shadow-xl hover:shadow-2xl transition-all duration-500"
     >
       {/* Image */}
       <div className="relative h-48 sm:h-56 overflow-hidden">
@@ -164,7 +175,7 @@ function MobilePortfolioCard({ item, index }) {
           src={item.imageUrl || "/placeholder.svg"}
           alt={item.title}
           fill
-          className={`object-cover transition-all duration-500 ${
+          className={`object-cover transition-all duration-700 ${
             imageLoaded ? "scale-100 blur-0" : "scale-110 blur-sm"
           }`}
           onLoad={() => setImageLoaded(true)}
@@ -190,17 +201,24 @@ function MobilePortfolioCard({ item, index }) {
         {/* Features */}
         <div className="grid grid-cols-2 gap-2 mb-6">
           {item.features.map((feature, featureIndex) => (
-            <div
+            <motion.div
               key={featureIndex}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{
+                delay: 0.3 + featureIndex * 0.1,
+                duration: 0.5,
+                ease: "easeOut",
+              }}
               className="bg-houtcore-gold/10 border border-houtcore-gold/20 text-houtcore-gold px-2 py-1 rounded-lg text-xs text-center"
             >
               {feature}
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* CTA Button */}
-        <button className="w-full bg-houtcore-gold text-houtcore-charcoal py-3 rounded-xl font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 flex items-center justify-center space-x-2">
+        <button className="w-full bg-houtcore-gold text-houtcore-charcoal py-3 rounded-xl font-semibold hover:bg-houtcore-gold/90 transition-all duration-400 flex items-center justify-center space-x-2">
           <span>Project Details</span>
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -271,7 +289,7 @@ function DesktopPortfolioItem({ item, index, isEven }) {
               transition={{ delay: 0.5, duration: 0.4 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-houtcore-gold text-houtcore-charcoal px-6 py-3 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 inline-flex items-center space-x-2 shadow-lg hover:shadow-xl"
+              className="bg-houtcore-gold text-houtcore-charcoal px-6 py-3 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-300 inline-flex items-center space-x-2 shadow-lg hover:shadow-xl"
             >
               <span>Project Details</span>
               <ArrowRight className="w-4 h-4" />
