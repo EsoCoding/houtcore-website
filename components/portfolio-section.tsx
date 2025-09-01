@@ -78,7 +78,7 @@ export default function PortfolioSection() {
     <section
       id="portfolio"
       ref={sectionRef}
-      className="py-12 sm:py-16 lg:py-24 bg-[#2d3134] text-white relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-24 bg-houtcore-charcoal text-white relative overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 opacity-5">
@@ -93,7 +93,7 @@ export default function PortfolioSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12 lg:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 text-[#EEB457]">Ons Portfolio</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 text-houtcore-gold">Ons Portfolio</h2>
           <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto">
             Ontdek onze recent voltooide projecten en laat u inspireren door vakmanschap
           </p>
@@ -112,9 +112,9 @@ export default function PortfolioSection() {
         <div ref={timelineRef} className="relative hidden lg:block">
           {/* Central Timeline Line */}
           <div className="absolute left-1/2 top-0 bottom-0 transform -translate-x-1/2" style={{ width: "2px" }}>
-            <div className="w-full h-full bg-[#B89960]/30"></div>
+            <div className="w-full h-full bg-houtcore-brown/30"></div>
             <motion.div
-              className="absolute top-0 left-0 w-full bg-[#EEB457] origin-top"
+              className="absolute top-0 left-0 w-full bg-houtcore-gold origin-top"
               style={{ height: timelineProgress }}
             />
           </div>
@@ -134,7 +134,7 @@ export default function PortfolioSection() {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="text-center mt-12 lg:mt-20"
         >
-          <button className="bg-[#EEB457] text-[#2d3134] px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-[#EEB457]/90 transition-all duration-200 hover:shadow-xl inline-flex items-center justify-center space-x-2 text-sm lg:text-base">
+          <button className="bg-houtcore-gold text-houtcore-charcoal px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 hover:shadow-xl inline-flex items-center justify-center space-x-2 text-sm lg:text-base">
             <span>Bekijk Alle Projecten</span>
             <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
           </button>
@@ -156,7 +156,7 @@ function MobilePortfolioCard({ item, index }) {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ delay: index * 0.1, duration: 0.6 }}
-      className="bg-[#B89960]/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#B89960]/20 shadow-xl hover:shadow-2xl transition-all duration-300"
+      className="bg-houtcore-brown/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-houtcore-brown/20 shadow-xl hover:shadow-2xl transition-all duration-300"
     >
       {/* Image */}
       <div className="relative h-48 sm:h-56 overflow-hidden">
@@ -169,15 +169,15 @@ function MobilePortfolioCard({ item, index }) {
           }`}
           onLoad={() => setImageLoaded(true)}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2d3134]/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-houtcore-charcoal/80 via-transparent to-transparent" />
 
         {/* Category Badge */}
-        <div className="absolute top-4 left-4 bg-[#EEB457] text-[#2d3134] px-3 py-1 rounded-full text-xs font-semibold">
+        <div className="absolute top-4 left-4 bg-houtcore-gold text-houtcore-charcoal px-3 py-1 rounded-full text-xs font-semibold">
           {item.category}
         </div>
 
         {/* Year Badge */}
-        <div className="absolute top-4 right-4 bg-[#2d3134]/80 backdrop-blur-sm text-[#EEB457] px-3 py-1 rounded-full text-xs font-semibold">
+        <div className="absolute top-4 right-4 bg-houtcore-charcoal/80 backdrop-blur-sm text-houtcore-gold px-3 py-1 rounded-full text-xs font-semibold">
           {item.year}
         </div>
       </div>
@@ -192,7 +192,7 @@ function MobilePortfolioCard({ item, index }) {
           {item.features.map((feature, featureIndex) => (
             <div
               key={featureIndex}
-              className="bg-[#EEB457]/10 border border-[#EEB457]/20 text-[#EEB457] px-2 py-1 rounded-lg text-xs text-center"
+              className="bg-houtcore-gold/10 border border-houtcore-gold/20 text-houtcore-gold px-2 py-1 rounded-lg text-xs text-center"
             >
               {feature}
             </div>
@@ -200,7 +200,7 @@ function MobilePortfolioCard({ item, index }) {
         </div>
 
         {/* CTA Button */}
-        <button className="w-full bg-[#EEB457] text-[#2d3134] py-3 rounded-xl font-semibold hover:bg-[#EEB457]/90 transition-all duration-200 flex items-center justify-center space-x-2">
+        <button className="w-full bg-houtcore-gold text-houtcore-charcoal py-3 rounded-xl font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 flex items-center justify-center space-x-2">
           <span>Project Details</span>
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -223,9 +223,9 @@ function DesktopPortfolioItem({ item, index, isEven }) {
           initial={{ scale: 0 }}
           animate={isInView ? { scale: 1 } : { scale: 0 }}
           transition={{ delay: 0.2, duration: 0.4, type: "spring" }}
-          className="w-8 h-8 bg-[#2d3134] rounded-full flex items-center justify-center border-4 border-[#EEB457] shadow-2xl"
+          className="w-8 h-8 bg-houtcore-charcoal rounded-full flex items-center justify-center border-4 border-houtcore-gold shadow-2xl"
         >
-          <div className="w-3 h-3 bg-[#B89960] rounded-full"></div>
+          <div className="w-3 h-3 bg-houtcore-brown rounded-full"></div>
         </motion.div>
       </div>
 
@@ -240,10 +240,10 @@ function DesktopPortfolioItem({ item, index, isEven }) {
             className="flex-1 space-y-6"
           >
             <div className="space-y-4">
-              <div className="flex items-center space-x-4 text-[#B89960]">
+              <div className="flex items-center space-x-4 text-houtcore-brown">
                 <Calendar className="w-5 h-5" />
                 <span className="font-medium">{item.year}</span>
-                <span className="w-2 h-2 bg-[#EEB457] rounded-full"></span>
+                <span className="w-2 h-2 bg-houtcore-gold rounded-full"></span>
                 <span className="font-medium">{item.category}</span>
               </div>
               <h3 className="text-3xl font-bold text-white">{item.title}</h3>
@@ -258,7 +258,7 @@ function DesktopPortfolioItem({ item, index, isEven }) {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                   transition={{ delay: 0.4 + featureIndex * 0.05, duration: 0.3 }}
-                  className="bg-[#EEB457]/10 border border-[#EEB457]/20 text-[#EEB457] px-3 py-2 rounded-lg text-sm font-medium text-center"
+                  className="bg-houtcore-gold/10 border border-houtcore-gold/20 text-houtcore-gold px-3 py-2 rounded-lg text-sm font-medium text-center"
                 >
                   {feature}
                 </motion.div>
@@ -271,7 +271,7 @@ function DesktopPortfolioItem({ item, index, isEven }) {
               transition={{ delay: 0.5, duration: 0.4 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#EEB457] text-[#2d3134] px-6 py-3 rounded-full font-semibold hover:bg-[#EEB457]/90 transition-all duration-200 inline-flex items-center space-x-2 shadow-lg hover:shadow-xl"
+              className="bg-houtcore-gold text-houtcore-charcoal px-6 py-3 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 inline-flex items-center space-x-2 shadow-lg hover:shadow-xl"
             >
               <span>Project Details</span>
               <ArrowRight className="w-4 h-4" />
@@ -286,7 +286,7 @@ function DesktopPortfolioItem({ item, index, isEven }) {
             className="flex-1"
           >
             <div className="relative group">
-              <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl bg-[#B89960]/20">
+              <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl bg-houtcore-brown/20">
                 <Image
                   src={item.imageUrl || "/placeholder.svg"}
                   alt={item.title}
@@ -297,18 +297,18 @@ function DesktopPortfolioItem({ item, index, isEven }) {
                   onLoad={() => setImageLoaded(true)}
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2d3134]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-houtcore-charcoal/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="absolute top-4 right-4 bg-[#EEB457] text-[#2d3134] p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute top-4 right-4 bg-houtcore-gold text-houtcore-charcoal p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 >
                   <Eye className="w-5 h-5" />
                 </motion.button>
               </div>
 
-              <div className="absolute top-4 left-4 bg-[#2d3134]/90 backdrop-blur-sm text-[#EEB457] px-4 py-2 rounded-full text-sm font-semibold">
+              <div className="absolute top-4 left-4 bg-houtcore-charcoal/90 backdrop-blur-sm text-houtcore-gold px-4 py-2 rounded-full text-sm font-semibold">
                 {item.category}
               </div>
             </div>

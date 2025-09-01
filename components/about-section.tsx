@@ -12,7 +12,7 @@ export default function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-12 sm:py-16 lg:py-20 bg-[#2d3134] text-white relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-20 bg-houtcore-charcoal text-white relative overflow-hidden"
     >
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-10">
@@ -29,10 +29,10 @@ export default function AboutSection() {
             className="text-center mb-12 lg:mb-16"
           >
             <div className="inline-block">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 text-[#B89960] tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 text-houtcore-brown tracking-tight">
                 Over <span className="font-bold">Houtcore</span>
               </h2>
-              <div className="w-16 sm:w-24 h-1 bg-[#EEB457] mx-auto"></div>
+              <div className="w-16 sm:w-24 h-1 bg-houtcore-gold mx-auto"></div>
             </div>
           </motion.div>
 
@@ -61,7 +61,7 @@ export default function AboutSection() {
               className="lg:col-span-5"
             >
               <div className="lg:pl-6 xl:pl-8">
-                <h3 className="text-xl sm:text-2xl font-light mb-4 lg:mb-6 text-[#EEB457]">
+                <h3 className="text-xl sm:text-2xl font-light mb-4 lg:mb-6 text-houtcore-gold">
                   De man achter het ambacht
                 </h3>
 
@@ -82,10 +82,10 @@ export default function AboutSection() {
                   </p>
                 </div>
 
-                <div className="pt-4 lg:pt-6 border-t border-[#B89960]/30 mt-5 lg:mt-7">
+                <div className="pt-4 lg:pt-6 border-t border-houtcore-brown/30 mt-5 lg:mt-7">
                   <motion.a
                     href="/story"
-                    className="inline-flex items-center space-x-2 lg:space-x-3 text-[#EEB457] font-medium text-base lg:text-lg hover:text-[#B89960] transition-colors duration-200 group"
+                    className="inline-flex items-center space-x-2 lg:space-x-3 text-houtcore-gold font-medium text-base lg:text-lg hover:text-houtcore-brown transition-colors duration-200 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -113,10 +113,10 @@ export default function AboutSection() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="relative"
           >
-            <div className="bg-gradient-to-r from-[#EEB457]/5 via-[#B89960]/5 to-[#EEB457]/5 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12 border border-[#B89960]/20">
+            <div className="bg-gradient-to-r from-houtcore-gold/5 via-houtcore-brown/5 to-houtcore-gold/5 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12 border border-houtcore-brown/20">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12 text-center">
                 <div className="group">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#EEB457] mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-gold mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
                     15+
                   </div>
                   <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">
@@ -125,7 +125,7 @@ export default function AboutSection() {
                 </div>
 
                 <div className="group">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#B89960] mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-brown mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
                     100%
                   </div>
                   <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">
@@ -134,7 +134,7 @@ export default function AboutSection() {
                 </div>
 
                 <div className="group">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#EEB457] mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-houtcore-gold mb-2 lg:mb-3 group-hover:scale-110 transition-transform duration-200">
                     ∞
                   </div>
                   <div className="text-sm sm:text-base lg:text-lg text-gray-300 font-light uppercase tracking-wider">

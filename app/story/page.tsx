@@ -7,13 +7,13 @@ import { ArrowLeft, Calendar, Award, Heart } from "lucide-react"
 
 export default function StoryPage() {
   return (
-    <main className="min-h-screen bg-[#2d3134] text-white">
+    <main className="min-h-screen bg-houtcore-charcoal text-white">
       {/* Header with back button */}
       <div className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-8 lg:pb-12">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <Link
             href="/"
-            className="inline-flex items-center space-x-2 text-[#EEB457] hover:text-[#B89960] transition-colors duration-200 mb-6 lg:mb-8"
+            className="inline-flex items-center space-x-2 text-houtcore-gold hover:text-houtcore-brown transition-colors duration-200 mb-6 lg:mb-8"
           >
             <ArrowLeft className="w-4 h-4 lg:w-5 lg:h-5" />
             <span className="text-sm lg:text-base">Terug naar home</span>
@@ -27,10 +27,10 @@ export default function StoryPage() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12 lg:mb-16"
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 lg:mb-6 text-[#B89960] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 lg:mb-6 text-houtcore-brown tracking-tight">
             Mijn <span className="font-bold">Verhaal</span>
           </h1>
-          <div className="w-16 sm:w-24 h-1 bg-[#EEB457] mx-auto mb-4 lg:mb-6"></div>
+          <div className="w-16 sm:w-24 h-1 bg-houtcore-gold mx-auto mb-4 lg:mb-6"></div>
           <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto px-4">
             De reis van een passie naar een ambacht, van een droom naar Houtcore
           </p>
@@ -51,8 +51,8 @@ export default function StoryPage() {
             >
               <div>
                 <div className="flex items-center space-x-3 mb-4 lg:mb-6">
-                  <Heart className="w-5 h-5 lg:w-6 lg:h-6 text-[#EEB457]" />
-                  <h2 className="text-2xl lg:text-3xl font-bold text-[#EEB457]">Het Begin</h2>
+                  <Heart className="w-5 h-5 lg:w-6 lg:h-6 text-houtcore-gold" />
+                  <h2 className="text-2xl lg:text-3xl font-bold text-houtcore-gold">Het Begin</h2>
                 </div>
                 <div className="space-y-3 lg:space-y-4 text-base lg:text-lg leading-relaxed text-gray-300">
                   <p>
@@ -68,7 +68,7 @@ export default function StoryPage() {
               </div>
               <div className="relative h-64 sm:h-72 lg:h-80 rounded-xl lg:rounded-2xl overflow-hidden shadow-2xl">
                 <Image src="/wood-texture.jpeg" alt="Houtbewerking traditie" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2d3134]/60 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-houtcore-charcoal/60 to-transparent"></div>
               </div>
             </motion.section>
 
@@ -81,8 +81,8 @@ export default function StoryPage() {
             >
               <div className="lg:order-2">
                 <div className="flex items-center space-x-3 mb-4 lg:mb-6">
-                  <Calendar className="w-5 h-5 lg:w-6 lg:h-6 text-[#B89960]" />
-                  <h2 className="text-2xl lg:text-3xl font-bold text-[#EEB457]">2008 - De Opleiding</h2>
+                  <Calendar className="w-5 h-5 lg:w-6 lg:h-6 text-houtcore-brown" />
+                  <h2 className="text-2xl lg:text-3xl font-bold text-houtcore-gold">2008 - De Opleiding</h2>
                 </div>
                 <div className="space-y-3 lg:space-y-4 text-base lg:text-lg leading-relaxed text-gray-300">
                   <p>
@@ -97,7 +97,7 @@ export default function StoryPage() {
               </div>
               <div className="lg:order-1 relative h-64 sm:h-72 lg:h-80 rounded-xl lg:rounded-2xl overflow-hidden shadow-2xl">
                 <Image src="/woodworking-workshop.png" alt="Meubelmakeropleiding" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2d3134]/60 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-houtcore-charcoal/60 to-transparent"></div>
               </div>
             </motion.section>
 
@@ -110,8 +110,8 @@ export default function StoryPage() {
             >
               <div>
                 <div className="flex items-center space-x-3 mb-4 lg:mb-6">
-                  <Award className="w-5 h-5 lg:w-6 lg:h-6 text-[#EEB457]" />
-                  <h2 className="text-2xl lg:text-3xl font-bold text-[#EEB457]">Jaren van Ervaring</h2>
+                  <Award className="w-5 h-5 lg:w-6 lg:h-6 text-houtcore-gold" />
+                  <h2 className="text-2xl lg:text-3xl font-bold text-houtcore-gold">Jaren van Ervaring</h2>
                 </div>
                 <div className="space-y-3 lg:space-y-4 text-base lg:text-lg leading-relaxed text-gray-300">
                   <p>
@@ -126,7 +126,7 @@ export default function StoryPage() {
               </div>
               <div className="relative h-64 sm:h-72 lg:h-80 rounded-xl lg:rounded-2xl overflow-hidden shadow-2xl">
                 <Image src="/custom-wooden-furniture.png" alt="Maatwerk meubels" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2d3134]/60 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-houtcore-charcoal/60 to-transparent"></div>
               </div>
             </motion.section>
 
@@ -135,9 +135,9 @@ export default function StoryPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-center bg-gradient-to-r from-[#EEB457]/5 via-[#B89960]/5 to-[#EEB457]/5 rounded-2xl lg:rounded-3xl p-8 lg:p-12 border border-[#B89960]/20"
+              className="text-center bg-gradient-to-r from-houtcore-gold/5 via-houtcore-brown/5 to-houtcore-gold/5 rounded-2xl lg:rounded-3xl p-8 lg:p-12 border border-houtcore-brown/20"
             >
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#B89960] mb-6 lg:mb-8">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-houtcore-brown mb-6 lg:mb-8">
                 2023 - Houtcore is Geboren
               </h2>
               <div className="max-w-3xl mx-auto space-y-4 lg:space-y-6 text-base lg:text-lg leading-relaxed text-gray-300">
@@ -149,7 +149,7 @@ export default function StoryPage() {
                   Bij Houtcore draait alles om duurzaamheid en kwaliteit. Ik werk alleen met verantwoord geoogst hout en
                   gebruik technieken die ervoor zorgen dat uw meubel generaties lang meegaat.
                 </p>
-                <blockquote className="text-lg sm:text-xl lg:text-2xl font-light italic text-[#EEB457] leading-relaxed border-l-4 border-[#EEB457] pl-4 lg:pl-8 my-6 lg:my-8">
+                <blockquote className="text-lg sm:text-xl lg:text-2xl font-light italic text-houtcore-gold leading-relaxed border-l-4 border-houtcore-gold pl-4 lg:pl-8 my-6 lg:my-8">
                   "Vakmanschap is de kunst van het perfect maken van iets unieks."
                 </blockquote>
                 <p>
@@ -169,7 +169,7 @@ export default function StoryPage() {
           >
             <Link
               href="/#contact"
-              className="inline-flex items-center space-x-2 lg:space-x-3 bg-[#EEB457] text-[#2d3134] px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-[#EEB457]/90 transition-all duration-200 shadow-xl text-sm lg:text-base"
+              className="inline-flex items-center space-x-2 lg:space-x-3 bg-houtcore-gold text-houtcore-charcoal px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 shadow-xl text-sm lg:text-base"
             >
               <span>Laten we jouw verhaal maken</span>
               <ArrowLeft className="w-4 h-4 lg:w-5 lg:h-5 rotate-180" />

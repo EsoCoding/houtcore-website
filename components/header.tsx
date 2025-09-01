@@ -43,9 +43,8 @@ export default function Header() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50"
+      className="fixed top-0 left-0 right-0 z-50 bg-houtcore-charcoal"
       style={{
-        backgroundColor: "#2d3134",
         borderBottom: "none",
         boxShadow: "none",
       }}
@@ -57,7 +56,7 @@ export default function Header() {
             <div className="w-8 h-8 sm:w-12 sm:h-12 relative">
               <Image src="/logo.png" alt="Houtcore Logo" fill className="object-contain brightness-0 invert" />
             </div>
-            <span className="text-[#B89960] text-lg sm:text-2xl font-bold tracking-wide">Houtcore</span>
+            <span className="text-houtcore-brown text-lg sm:text-2xl font-bold tracking-wide">Houtcore</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -66,7 +65,7 @@ export default function Header() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-white hover:text-[#EEB457] transition-colors duration-200 font-medium text-sm xl:text-base"
+                className="text-white hover:text-houtcore-gold transition-colors duration-200 font-medium text-sm xl:text-base"
               >
                 {item.name}
               </button>
@@ -74,7 +73,7 @@ export default function Header() {
 
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-[#EEB457] text-[#2d3134] px-4 xl:px-6 py-2 rounded-full font-semibold hover:bg-[#EEB457]/90 transition-all duration-200 text-sm xl:text-base"
+              className="bg-houtcore-gold text-houtcore-charcoal px-4 xl:px-6 py-2 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 text-sm xl:text-base"
             >
               Offerte Aanvragen
             </button>
@@ -89,21 +88,21 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="lg:hidden" style={{ backgroundColor: "#2d3134" }}>
+        <div className="lg:hidden bg-houtcore-charcoal">
           <div className="container mx-auto px-4 sm:px-6 py-4">
             <div className="flex flex-col space-y-3">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-white hover:text-[#EEB457] transition-colors duration-200 text-left py-2 font-medium"
+                  className="text-white hover:text-houtcore-gold transition-colors duration-200 text-left py-2 font-medium"
                 >
                   {item.name}
                 </button>
               ))}
               <button
                 onClick={() => scrollToSection("contact")}
-                className="bg-[#EEB457] text-[#2d3134] px-6 py-3 rounded-full font-semibold hover:bg-[#EEB457]/90 transition-all duration-200 text-center mt-2"
+                className="bg-houtcore-gold text-houtcore-charcoal px-6 py-3 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-200 text-center mt-2"
               >
                 Offerte Aanvragen
               </button>

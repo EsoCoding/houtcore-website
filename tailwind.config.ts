@@ -62,8 +62,14 @@ const config: Config = {
           ring: "hsl(var(--sidebar-ring))",
         },
         charcoal: "#2d3134",
-        gold: "#EEB457", // Changed from "#f2b451" to "#EEB457"
+        gold: "#EEB457",
         "gold-brown": "#B89960",
+        // Add specific color variations for better control
+        "houtcore-gold": "#EEB457",
+        "houtcore-gold-light": "#F2C574",
+        "houtcore-gold-dark": "#D4A043",
+        "houtcore-brown": "#B89960",
+        "houtcore-charcoal": "#2d3134",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -99,5 +105,20 @@ const config: Config = {
     },
   },
   plugins: [],
+  safelist: [
+    // Ensure these colors are always included in the build
+    "bg-houtcore-gold",
+    "text-houtcore-gold",
+    "border-houtcore-gold",
+    "hover:bg-houtcore-gold",
+    "hover:text-houtcore-gold",
+    "bg-houtcore-gold/90",
+    "bg-houtcore-gold/10",
+    "bg-houtcore-gold/5",
+    "border-houtcore-gold/20",
+    "text-houtcore-brown",
+    "bg-houtcore-brown",
+    "bg-houtcore-charcoal",
+  ],
 }
 export default config
