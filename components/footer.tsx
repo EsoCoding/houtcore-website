@@ -3,9 +3,22 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from "lucide-react"
+import { useState, useEffect } from "react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   const socialLinks = [
     { icon: <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />, href: "#", label: "Instagram" },
@@ -59,7 +72,7 @@ export default function Footer() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                duration: window.innerWidth < 768 ? 0.8 : 0.4,
+                duration: isMobile ? 0.8 : 0.4,
                 ease: "easeOut",
               }}
               className="sm:col-span-2 lg:col-span-1"
@@ -98,8 +111,8 @@ export default function Footer() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                delay: window.innerWidth < 768 ? 0.2 : 0.1,
-                duration: window.innerWidth < 768 ? 0.8 : 0.4,
+                delay: isMobile ? 0.2 : 0.1,
+                duration: isMobile ? 0.8 : 0.4,
                 ease: "easeOut",
               }}
             >
@@ -123,8 +136,8 @@ export default function Footer() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                delay: window.innerWidth < 768 ? 0.4 : 0.2,
-                duration: window.innerWidth < 768 ? 0.8 : 0.4,
+                delay: isMobile ? 0.4 : 0.2,
+                duration: isMobile ? 0.8 : 0.4,
                 ease: "easeOut",
               }}
             >
@@ -143,8 +156,8 @@ export default function Footer() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                delay: window.innerWidth < 768 ? 0.6 : 0.3,
-                duration: window.innerWidth < 768 ? 0.8 : 0.4,
+                delay: isMobile ? 0.6 : 0.3,
+                duration: isMobile ? 0.8 : 0.4,
                 ease: "easeOut",
               }}
             >
@@ -196,8 +209,8 @@ export default function Footer() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{
-            delay: window.innerWidth < 768 ? 0.8 : 0.4,
-            duration: window.innerWidth < 768 ? 0.8 : 0.4,
+            delay: isMobile ? 0.8 : 0.4,
+            duration: isMobile ? 0.8 : 0.4,
             ease: "easeOut",
           }}
           className="border-t border-houtcore-brown/20 py-4 lg:py-6"

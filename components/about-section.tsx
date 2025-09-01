@@ -1,12 +1,24 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { amount: 0.2 })
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   // Mobile-specific animation durations
   const mobileAnimationDuration = 0.8
@@ -30,7 +42,7 @@ export default function AboutSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{
-              duration: window.innerWidth < 768 ? mobileAnimationDuration : desktopAnimationDuration,
+              duration: isMobile ? mobileAnimationDuration : desktopAnimationDuration,
               ease: "easeOut",
             }}
             className="text-center mb-12 lg:mb-16"
@@ -50,9 +62,9 @@ export default function AboutSection() {
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{
-                duration: window.innerWidth < 768 ? mobileAnimationDuration + 0.2 : desktopAnimationDuration + 0.1,
+                duration: isMobile ? mobileAnimationDuration + 0.2 : desktopAnimationDuration + 0.1,
                 ease: "easeOut",
-                delay: window.innerWidth < 768 ? 0.2 : 0.1,
+                delay: isMobile ? 0.2 : 0.1,
               }}
               className="lg:col-span-7"
             >
@@ -69,9 +81,9 @@ export default function AboutSection() {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{
-                duration: window.innerWidth < 768 ? mobileAnimationDuration + 0.2 : desktopAnimationDuration + 0.1,
+                duration: isMobile ? mobileAnimationDuration + 0.2 : desktopAnimationDuration + 0.1,
                 ease: "easeOut",
-                delay: window.innerWidth < 768 ? 0.4 : 0.2,
+                delay: isMobile ? 0.4 : 0.2,
               }}
               className="lg:col-span-5"
             >
@@ -127,8 +139,8 @@ export default function AboutSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{
-              delay: window.innerWidth < 768 ? 0.6 : 0.3,
-              duration: window.innerWidth < 768 ? mobileAnimationDuration : desktopAnimationDuration,
+              delay: isMobile ? 0.6 : 0.3,
+              duration: isMobile ? mobileAnimationDuration : desktopAnimationDuration,
               ease: "easeOut",
             }}
             className="relative"

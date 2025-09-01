@@ -4,8 +4,21 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Calendar, Award, Heart } from "lucide-react"
+import { useState, useEffect } from "react"
 
 export default function StoryPage() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
   return (
     <main className="min-h-screen bg-houtcore-charcoal text-white">
       {/* Header with back button */}
@@ -14,7 +27,7 @@ export default function StoryPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: window.innerWidth < 768 ? 0.8 : 0.4,
+            duration: isMobile ? 0.8 : 0.4,
             ease: "easeOut",
           }}
         >
@@ -32,7 +45,7 @@ export default function StoryPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: window.innerWidth < 768 ? 0.9 : 0.5,
+            duration: isMobile ? 0.9 : 0.5,
             ease: "easeOut",
           }}
           className="text-center mb-12 lg:mb-16"
@@ -57,7 +70,7 @@ export default function StoryPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                duration: window.innerWidth < 768 ? 0.8 : 0.5,
+                duration: isMobile ? 0.8 : 0.5,
                 ease: "easeOut",
               }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
@@ -90,7 +103,7 @@ export default function StoryPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                duration: window.innerWidth < 768 ? 0.8 : 0.5,
+                duration: isMobile ? 0.8 : 0.5,
                 ease: "easeOut",
               }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
@@ -122,7 +135,7 @@ export default function StoryPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                duration: window.innerWidth < 768 ? 0.8 : 0.5,
+                duration: isMobile ? 0.8 : 0.5,
                 ease: "easeOut",
               }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
@@ -154,7 +167,7 @@ export default function StoryPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                duration: window.innerWidth < 768 ? 0.8 : 0.5,
+                duration: isMobile ? 0.8 : 0.5,
                 ease: "easeOut",
               }}
               className="text-center bg-gradient-to-r from-houtcore-gold/5 via-houtcore-brown/5 to-houtcore-gold/5 rounded-2xl lg:rounded-3xl p-8 lg:p-12 border border-houtcore-brown/20"
@@ -187,7 +200,7 @@ export default function StoryPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{
-              duration: window.innerWidth < 768 ? 0.8 : 0.5,
+              duration: isMobile ? 0.8 : 0.5,
               ease: "easeOut",
             }}
             className="text-center mt-12 lg:mt-16"

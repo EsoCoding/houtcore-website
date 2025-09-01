@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { Calendar, Eye, ArrowRight } from "lucide-react"
@@ -66,6 +66,17 @@ export default function PortfolioSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { amount: 0.1 })
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: timelineRef,
@@ -91,7 +102,7 @@ export default function PortfolioSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{
-            duration: window.innerWidth < 768 ? 0.8 : 0.5,
+            duration: isMobile ? 0.8 : 0.5,
             ease: "easeOut",
           }}
           className="text-center mb-12 lg:mb-20"
@@ -135,8 +146,8 @@ export default function PortfolioSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{
-            delay: window.innerWidth < 768 ? 0.4 : 0.3,
-            duration: window.innerWidth < 768 ? 0.8 : 0.5,
+            delay: isMobile ? 0.4 : 0.3,
+            duration: isMobile ? 0.8 : 0.5,
             ease: "easeOut",
           }}
           className="text-center mt-12 lg:mt-20"
