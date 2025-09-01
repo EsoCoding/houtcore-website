@@ -294,17 +294,7 @@ function DesktopPortfolioItem({ item, index, isEven }) {
               ))}
             </div>
 
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.5, duration: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-houtcore-gold text-houtcore-charcoal px-6 py-3 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-300 inline-flex items-center space-x-2 shadow-lg hover:shadow-xl"
-            >
-              <span>Project Details</span>
-              <ArrowRight className="w-4 h-4" />
-            </motion.button>
+            
           </motion.div>
 
           {/* Image Side */}

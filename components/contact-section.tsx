@@ -13,25 +13,25 @@ export default function ContactSection() {
 
   const contactInfo = [
     {
-      icon: <Mail className="w-6 h-6" />,
+      icon: <Mail className="w-6 h-6 text-houtcore-gold" />,
       title: "Email",
       value: "info@houtcore.nl",
       description: "Stuur ons een bericht",
     },
     {
-      icon: <Phone className="w-6 h-6" />,
+      icon: <Phone className="w-6 h-6 text-houtcore-gold" />,
       title: "Telefoon",
       value: "+31 6 12345678",
       description: "Bel voor direct contact",
     },
     {
-      icon: <MapPin className="w-6 h-6" />,
+      icon: <MapPin className="w-6 h-6 text-houtcore-gold" />,
       title: "Locatie",
       value: "Nederland",
       description: "Werkplaats & Showroom",
     },
     {
-      icon: <Clock className="w-6 h-6" />,
+      icon: <Clock className="w-6 h-6 text-houtcore-gold" />,
       title: "Openingstijden",
       value: "Ma-Vr: 8:00-17:00",
       description: "Weekend op afspraak",
@@ -46,7 +46,11 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 bg-[#f2b451] text-[#2d3134] relative overflow-hidden">
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="py-24 bg-houtcore-gold text-houtcore-charcoal relative overflow-hidden"
+    >
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('/wood-texture.jpeg')] bg-repeat"></div>
@@ -60,8 +64,8 @@ export default function ContactSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-6">Neem Contact Op</h2>
-          <p className="text-xl text-[#2d3134]/80 max-w-2xl mx-auto">
+          <h2 className="text-5xl font-bold mb-6 text-houtcore-charcoal">Neem Contact Op</h2>
+          <p className="text-xl text-houtcore-charcoal/80 max-w-2xl mx-auto">
             Heeft u een project in gedachten? Laten we er samen iets moois van maken.
           </p>
         </motion.div>
@@ -75,8 +79,8 @@ export default function ContactSection() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-6">Kom in contact</h3>
-              <p className="text-lg text-[#2d3134]/80 mb-8">
+              <h3 className="text-2xl font-bold mb-6 text-houtcore-charcoal">Kom in contact</h3>
+              <p className="text-lg text-houtcore-charcoal/80 mb-8">
                 Van eerste idee tot eindproduct, ik begeleid u door het hele proces. Neem contact op voor een
                 vrijblijvend gesprek over uw project.
               </p>
@@ -89,14 +93,16 @@ export default function ContactSection() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-[#2d3134]/10 hover:bg-white/90 transition-all duration-300 hover:shadow-xl"
+                  className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-houtcore-charcoal/10 hover:bg-white/90 transition-all duration-300 hover:shadow-xl"
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="bg-[#2d3134] text-[#f2b451] p-3 rounded-xl flex-shrink-0">{info.icon}</div>
+                    <div className="bg-houtcore-charcoal text-houtcore-gold p-3 rounded-xl flex-shrink-0">
+                      {info.icon}
+                    </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-[#2d3134] mb-1">{info.title}</h4>
-                      <p className="text-[#2d3134] font-medium mb-1">{info.value}</p>
-                      <p className="text-[#2d3134]/70 text-sm">{info.description}</p>
+                      <h4 className="font-semibold text-houtcore-charcoal mb-1">{info.title}</h4>
+                      <p className="text-houtcore-charcoal font-medium mb-1">{info.value}</p>
+                      <p className="text-houtcore-charcoal/70 text-sm">{info.description}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -111,57 +117,57 @@ export default function ContactSection() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-[#2d3134]/10 shadow-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-[#2d3134]">Stuur een bericht</h3>
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-houtcore-charcoal/10 shadow-2xl">
+              <h3 className="text-2xl font-bold mb-6 text-houtcore-charcoal">Stuur een bericht</h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                    <label htmlFor="name" className="block text-sm font-semibold mb-2 text-houtcore-charcoal">
                       Naam *
                     </label>
                     <input
                       type="text"
                       id="name"
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl border border-houtcore-charcoal/20 focus:outline-none focus:ring-2 focus:ring-houtcore-charcoal focus:border-transparent transition-all duration-300"
                       placeholder="Uw naam"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                    <label htmlFor="email" className="block text-sm font-semibold mb-2 text-houtcore-charcoal">
                       Email *
                     </label>
                     <input
                       type="email"
                       id="email"
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl border border-houtcore-charcoal/20 focus:outline-none focus:ring-2 focus:ring-houtcore-charcoal focus:border-transparent transition-all duration-300"
                       placeholder="uw.email@example.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                  <label htmlFor="phone" className="block text-sm font-semibold mb-2 text-houtcore-charcoal">
                     Telefoon
                   </label>
                   <input
                     type="tel"
                     id="phone"
-                    className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-xl border border-houtcore-charcoal/20 focus:outline-none focus:ring-2 focus:ring-houtcore-charcoal focus:border-transparent transition-all duration-300"
                     placeholder="+31 6 12345678"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="project" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                  <label htmlFor="project" className="block text-sm font-semibold mb-2 text-houtcore-charcoal">
                     Project Type
                   </label>
                   <select
                     id="project"
-                    className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-xl border border-houtcore-charcoal/20 focus:outline-none focus:ring-2 focus:ring-houtcore-charcoal focus:border-transparent transition-all duration-300"
                   >
                     <option value="">Selecteer project type</option>
                     <option value="meubels">Meubels</option>
@@ -173,14 +179,14 @@ export default function ContactSection() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold mb-2 text-[#2d3134]">
+                  <label htmlFor="message" className="block text-sm font-semibold mb-2 text-houtcore-charcoal">
                     Bericht *
                   </label>
                   <textarea
                     id="message"
                     required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl border border-[#2d3134]/20 focus:outline-none focus:ring-2 focus:ring-[#2d3134] focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-houtcore-charcoal/20 focus:outline-none focus:ring-2 focus:ring-houtcore-charcoal focus:border-transparent transition-all duration-300 resize-none"
                     placeholder="Vertel ons over uw project..."
                   ></textarea>
                 </div>
@@ -190,7 +196,7 @@ export default function ContactSection() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={formSubmitted}
-                  className="w-full bg-[#2d3134] text-white py-4 rounded-xl font-semibold hover:bg-[#2d3134]/90 transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 shadow-lg hover:shadow-xl"
+                  className="w-full bg-houtcore-charcoal text-white py-4 rounded-xl font-semibold hover:bg-houtcore-charcoal/90 transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 shadow-lg hover:shadow-xl"
                 >
                   {formSubmitted ? (
                     <>
