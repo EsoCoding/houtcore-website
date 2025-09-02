@@ -3,62 +3,82 @@
 import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
-import { Calendar, Eye, ArrowRight } from "lucide-react"
+import { Calendar, Eye } from "lucide-react"
+import { fetchPortfolioItems, PortfolioItem } from "@/lib/api/portfolio"
 
-const portfolioItems = [
+// Fallback data in case API fails
+const fallbackPortfolioItems: PortfolioItem[] = [
   {
     id: 1,
     title: "Massieve Eiken Tafel",
-    category: "Tafels",
+    category: 1,
+    category_name: "Tafels",
     year: "2024",
     description: "Handgemaakte tafel van duurzaam eikenhout. Ontworpen met aandacht voor detail en duurzaamheid.",
-    imageUrl: "/dining-table.jpeg",
+    image: "/dining-table.jpeg",
     features: ["Massief eikenhout", "Handgemaakt", "Duurzaam", "Maatwerk"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   },
   {
     id: 2,
     title: "Inbouwkast met LED",
-    category: "Kasten",
+    category: 2,
+    category_name: "Kasten",
     year: "2024",
     description: "Op maat gemaakte kast met geïntegreerde verlichting. Perfect voor opbergen en sfeer.",
-    imageUrl: "/built-in-cabinet.jpeg",
+    image: "/built-in-cabinet.jpeg",
     features: ["LED-verlichting", "Op maat", "Ingebouwd", "Modern design"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   },
   {
     id: 3,
     title: "Houten Trap",
-    category: "Trappen",
+    category: 3,
+    category_name: "Trappen",
     year: "2023",
     description: "Minimalistische trap met houten treden. Een prachtige combinatie van functionaliteit en design.",
-    imageUrl: "/wooden-staircase.jpeg",
+    image: "/wooden-staircase.jpeg",
     features: ["Minimalistisch", "Functioneel", "Stijlvol", "Duurzaam"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   },
   {
     id: 4,
     title: "Design Hanglamp",
-    category: "Verlichting",
+    category: 4,
+    category_name: "Verlichting",
     year: "2023",
     description: "Unieke hanglamp met industriële uitstraling. Handgemaakt met aandacht voor detail.",
-    imageUrl: "/pendant-lamp.jpeg",
+    image: "/pendant-lamp.jpeg",
     features: ["Industrieel design", "Handgemaakt", "Uniek", "Sfeerverlichting"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   },
   {
     id: 5,
     title: "Witte Balustrade",
-    category: "Trappen",
+    category: 3,
+    category_name: "Trappen",
     year: "2023",
     description: "Strakke witte balustrade met houten details. Een veilige en stijlvolle toevoeging.",
-    imageUrl: "/white-railing.jpeg",
+    image: "/white-railing.jpeg",
     features: ["Strak design", "Veilig", "Wit met hout", "Modern"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   },
   {
     id: 6,
     title: "Maatwerk Meubels",
-    category: "Meubels",
+    category: 5,
+    category_name: "Meubels",
     year: "2024",
     description: "Meubels op maat voor elke ruimte. Ontworpen en gemaakt volgens uw wensen.",
-    imageUrl: "/custom-wooden-furniture.png",
+    image: "/custom-wooden-furniture.png",
     features: ["Volledig maatwerk", "Uniek ontwerp", "Perfecte pasvorm", "Kwaliteit"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   },
 ]
 
@@ -67,6 +87,9 @@ export default function PortfolioSection() {
   const timelineRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { amount: 0.1 })
   const [isMobile, setIsMobile] = useState(false)
+  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const checkMobile = () => {
@@ -76,6 +99,26 @@ export default function PortfolioSection() {
     checkMobile()
     window.addEventListener("resize", checkMobile)
     return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+  
+  // Fetch portfolio items from API
+  useEffect(() => {
+    const getPortfolioItems = async () => {
+      try {
+        setIsLoading(true)
+        const data = await fetchPortfolioItems()
+        setPortfolioItems(data)
+        setError(null)
+      } catch (err) {
+        console.error("Error fetching portfolio items:", err)
+        setError("Failed to load portfolio items. Using fallback data.")
+        setPortfolioItems(fallbackPortfolioItems)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    getPortfolioItems()
   }, [])
 
   const { scrollYProgress } = useScroll({
@@ -141,10 +184,10 @@ export default function PortfolioSection() {
           </div>
         </div>
 
-        {/* CTA */}
+        {/* Animated Arrow CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{
             delay: isMobile ? 0.4 : 0.3,
             duration: isMobile ? 0.8 : 0.5,
@@ -152,10 +195,51 @@ export default function PortfolioSection() {
           }}
           className="text-center mt-12 lg:mt-20"
         >
-          <button className="bg-houtcore-gold text-houtcore-charcoal px-6 lg:px-8 py-3 lg:py-4 rounded-full font-semibold hover:bg-houtcore-gold/90 transition-all duration-400 hover:shadow-xl inline-flex items-center justify-center space-x-2 text-sm lg:text-base">
-            <span>Bekijk Alle Projecten</span>
-            <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
-          </button>
+          <div className="relative group">
+            <motion.button 
+              onClick={() => {
+                const contactSection = document.getElementById("contact")
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
+              }}
+              className="bg-houtcore-gold/20 hover:bg-houtcore-gold text-houtcore-gold hover:text-houtcore-charcoal p-4 rounded-full transition-all duration-500 hover:shadow-xl flex items-center justify-center mx-auto"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              animate={{ 
+                y: [0, 8, 0],
+                transition: {
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+              aria-label="Scroll naar Contact sectie"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="w-6 h-6"
+              >
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+              </svg>
+            </motion.button>
+            
+            {/* Tooltip */}
+            <div className="absolute left-1/2 -translate-x-1/2 -bottom-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="bg-houtcore-charcoal text-houtcore-gold text-sm px-3 py-1 rounded-md whitespace-nowrap">
+                Naar Contact
+              </div>
+              <div className="w-3 h-3 bg-houtcore-charcoal transform rotate-45 absolute -top-1 left-1/2 -translate-x-1/2"></div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -163,7 +247,16 @@ export default function PortfolioSection() {
 }
 
 // Mobile Portfolio Card Component
-function MobilePortfolioCard({ item, index }) {
+interface PortfolioCardProps {
+  item: PortfolioItem;
+  index: number;
+}
+
+interface DesktopPortfolioItemProps extends PortfolioCardProps {
+  isEven: boolean;
+}
+
+function MobilePortfolioCard({ item, index }: PortfolioCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardRef, { amount: 0.3 })
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -183,7 +276,7 @@ function MobilePortfolioCard({ item, index }) {
       {/* Image */}
       <div className="relative h-48 sm:h-56 overflow-hidden">
         <Image
-          src={item.imageUrl || "/placeholder.svg"}
+          src={item.image || "/placeholder.svg"}
           alt={item.title}
           fill
           className={`object-cover transition-all duration-700 ${
@@ -195,7 +288,7 @@ function MobilePortfolioCard({ item, index }) {
 
         {/* Category Badge */}
         <div className="absolute top-4 left-4 bg-houtcore-gold text-houtcore-charcoal px-3 py-1 rounded-full text-xs font-semibold">
-          {item.category}
+          {item.category_name}
         </div>
 
         {/* Year Badge */}
@@ -211,7 +304,7 @@ function MobilePortfolioCard({ item, index }) {
 
         {/* Features */}
         <div className="grid grid-cols-2 gap-2 mb-6">
-          {item.features.map((feature, featureIndex) => (
+          {item.features.map((feature: string, featureIndex: number) => (
             <motion.div
               key={featureIndex}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -231,7 +324,20 @@ function MobilePortfolioCard({ item, index }) {
         {/* CTA Button */}
         <button className="w-full bg-houtcore-gold text-houtcore-charcoal py-3 rounded-xl font-semibold hover:bg-houtcore-gold/90 transition-all duration-400 flex items-center justify-center space-x-2">
           <span>Project Details</span>
-          <ArrowRight className="w-4 h-4" />
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="w-4 h-4"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </button>
       </div>
     </motion.div>
@@ -239,7 +345,7 @@ function MobilePortfolioCard({ item, index }) {
 }
 
 // Desktop Portfolio Item Component (Timeline)
-function DesktopPortfolioItem({ item, index, isEven }) {
+function DesktopPortfolioItem({ item, index, isEven }: DesktopPortfolioItemProps) {
   const itemRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(itemRef, { amount: 0.3 })
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -281,7 +387,7 @@ function DesktopPortfolioItem({ item, index, isEven }) {
             <p className="text-gray-300 text-lg leading-relaxed">{item.description}</p>
 
             <div className="grid grid-cols-2 gap-3">
-              {item.features.map((feature, featureIndex) => (
+              {item.features.map((feature: string, featureIndex: number) => (
                 <motion.div
                   key={featureIndex}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -307,7 +413,7 @@ function DesktopPortfolioItem({ item, index, isEven }) {
             <div className="relative group">
               <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl bg-houtcore-brown/20">
                 <Image
-                  src={item.imageUrl || "/placeholder.svg"}
+                  src={item.image || "/placeholder.svg"}
                   alt={item.title}
                   fill
                   className={`object-cover transition-all duration-500 ${

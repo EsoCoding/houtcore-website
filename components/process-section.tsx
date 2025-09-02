@@ -1,43 +1,92 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
-import { Pencil, Torus as Tools, Home, CheckCircle } from "lucide-react"
+import { Pencil, Hammer, CalendarCheck, Truck, ClipboardList, Ruler } from "lucide-react"
+import { fetchProcessSteps, ProcessStep as ProcessStepType } from "@/lib/api/process"
 
 export default function ProcessSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { amount: 0.2 })
-
-  const steps = [
-    {
-      icon: <Pencil size={32} />,
-      title: "Ontwerp & Overleg",
-      content:
-        "Samen met de klant verken ik de mogelijkheden om ideeën om te zetten in schetsen en uiteindelijk in een prachtig werkstuk.",
-      color: "bg-houtcore-gold",
-    },
-    {
-      icon: <Tools size={32} />,
-      title: "Productie",
-      content:
-        "Na goedkeuring begin ik met het ontwerpen en produceren van het project, waarbij de klant duidelijk ziet hoe het eindproduct eruit komt te zien.",
-      color: "bg-houtcore-brown",
-    },
-    {
-      icon: <Home size={32} />,
-      title: "Montage & Plaatsing",
-      content:
-        "Het project wordt in de werkplaats voorbereid en vervolgens op locatie gemonteerd, als prachtige toevoeging aan de bestaande omgeving.",
-      color: "bg-houtcore-charcoal",
-    },
-    {
-      icon: <CheckCircle size={32} />,
-      title: "Afwerking & Oplevering",
-      content:
-        "Met een hoogwaardige afwerking volgens de wensen van de klant komen we bij de oplevering. Tevredenheid en garantie staan voorop.",
-      color: "bg-houtcore-gold",
-    },
-  ]
+  const [processSteps, setProcessSteps] = useState<ProcessStepType[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  
+  // Fetch process steps from the API
+  useEffect(() => {
+    const getProcessSteps = async () => {
+      try {
+        setIsLoading(true)
+        const data = await fetchProcessSteps()
+        setProcessSteps(data)
+        setError(null)
+      } catch (err) {
+        console.error("Error fetching process steps:", err)
+        setError("Failed to load process steps.")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    getProcessSteps()
+  }, [])
+  
+  // Helper function to get the icon component based on icon_name
+  const getIconByName = (iconName: string) => {
+    switch (iconName) {
+      case 'clipboard-list':
+        return <ClipboardList size={32} />
+      case 'pencil-ruler':
+        return <Ruler size={32} />
+      case 'calendar':
+        return <CalendarCheck size={32} />
+      case 'hammer':
+        return <Hammer size={32} />
+      case 'truck':
+        return <Truck size={32} />
+      default:
+        return <Pencil size={32} />
+    }
+  }
+  
+  // Map API data to step format or use fallback data
+  const steps = processSteps.length > 0 ? 
+    processSteps.map((step, index) => ({
+      icon: getIconByName(step.icon_name),
+      title: step.title,
+      content: step.description,
+      color: index % 2 === 0 ? "bg-houtcore-gold" : "bg-houtcore-brown"
+    })) : 
+    [
+      {
+        icon: <ClipboardList size={32} />,
+        title: "Kennismaking & Consultatie",
+        content:
+          "We beginnen met een vrijblijvend gesprek om uw wensen en ideeën te bespreken. Tijdens deze fase verkennen we de mogelijkheden, materialen en budget.",
+        color: "bg-houtcore-gold",
+      },
+      {
+        icon: <Ruler size={32} />,
+        title: "Ontwerp & Voorstel",
+        content:
+          "Op basis van onze consultatie maak ik een ontwerp en gedetailleerd voorstel. Inclusief materiaalsamples, tijdlijn en een nauwkeurige offerte.",
+        color: "bg-houtcore-brown",
+      },
+      {
+        icon: <Hammer size={32} />,
+        title: "Productie & Afwerking",
+        content:
+          "In mijn werkplaats gaat het maakproces van start. U wordt op de hoogte gehouden van de voortgang. Elk stuk krijgt de aandacht die het verdient.",
+        color: "bg-houtcore-gold",
+      },
+      {
+        icon: <Truck size={32} />,
+        title: "Levering & Plaatsing",
+        content:
+          "Het eindproduct wordt zorgvuldig geleverd en indien nodig geïnstalleerd. We controleren samen of alles aan uw verwachtingen voldoet.",
+        color: "bg-houtcore-brown",
+      },
+    ]
 
   return (
     <section
@@ -64,11 +113,21 @@ export default function ProcessSection() {
         </motion.div>
 
         {/* Process steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {steps.map((step, index) => (
-            <ProcessCard key={index} step={step} index={index} isInView={isInView} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-houtcore-charcoal"></div>
+          </div>
+        ) : error ? (
+          <div className="text-center py-10">
+            <p className="text-houtcore-charcoal/80 bg-white/50 backdrop-blur-sm p-4 rounded-lg inline-block">{error}</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-12">
+            {steps.map((step, index) => (
+              <ProcessCard key={index} step={step} index={index} isInView={isInView} />
+            ))}
+          </div>
+        )}
 
         {/* Process flow - desktop only */}
         <div className="hidden lg:block relative">
@@ -85,7 +144,20 @@ export default function ProcessSection() {
   )
 }
 
-function ProcessCard({ step, index, isInView }) {
+type Step = {
+  icon: React.ReactNode
+  title: string
+  content: string
+  color: string
+}
+
+type ProcessCardProps = {
+  step: Step
+  index: number
+  isInView: boolean
+}
+
+function ProcessCard({ step, index, isInView }: ProcessCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -115,21 +187,7 @@ function ProcessCard({ step, index, isInView }) {
         </div>
 
         {/* Content */}
-        <p className="text-houtcore-charcoal/80 leading-relaxed flex-grow mb-6">{step.content}</p>
-
-        {/* CTA */}
-        <button className="text-houtcore-charcoal hover:text-houtcore-charcoal/70 transition-colors duration-300 text-sm font-medium flex items-center self-start opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          Meer informatie
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+        <p className="text-houtcore-charcoal/80 leading-relaxed flex-grow">{step.content}</p>
       </div>
     </motion.div>
   )

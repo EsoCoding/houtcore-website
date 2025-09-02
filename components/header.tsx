@@ -43,10 +43,10 @@ export default function Header() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 bg-houtcore-charcoal"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-houtcore-charcoal/90 backdrop-blur-sm' : 'bg-houtcore-charcoal/70 backdrop-blur-sm'}`}
       style={{
         borderBottom: "none",
-        boxShadow: "none",
+        boxShadow: isScrolled ? "0 4px 20px rgba(0,0,0,0.1)" : "none",
       }}
     >
       <div className="container mx-auto px-4 sm:px-6">

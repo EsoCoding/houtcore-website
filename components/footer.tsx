@@ -2,13 +2,51 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, ArrowUp } from "lucide-react"
+import { Mail, Phone, MapPin, Instagram, Facebook, ArrowUp } from "lucide-react"
 import { useState, useEffect } from "react"
+import { fetchContactInfo, ContactInfoItem } from "@/lib/api/contact"
+
+// Helper function to dynamically get the right icon component
+const dynamicIconComponent = (iconName: string) => {
+  switch (iconName) {
+    case 'mail':
+      return Mail;
+    case 'phone':
+      return Phone;
+    case 'map-pin':
+      return MapPin;
+    default:
+      return null;
+  }
+}
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const [isMobile, setIsMobile] = useState(false)
+  const [contactInfo, setContactInfo] = useState<ContactInfoItem[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  
+  // Fetch contact information
+  useEffect(() => {
+    const getContactInfo = async () => {
+      try {
+        setIsLoading(true)
+        const data = await fetchContactInfo()
+        if (data && data.results) {
+          // Sort by order field
+          const sortedInfo = data.results.sort((a, b) => a.order - b.order)
+          setContactInfo(sortedInfo)
+        }
+      } catch (err) {
+        console.error("Error fetching contact info for footer:", err)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    getContactInfo()
+  }, [])
 
   useEffect(() => {
     const checkMobile = () => {
@@ -23,7 +61,6 @@ export default function Footer() {
   const socialLinks = [
     { icon: <Instagram className="w-5 h-5" />, href: "#", label: "Instagram" },
     { icon: <Facebook className="w-5 h-5" />, href: "#", label: "Facebook" },
-    { icon: <Linkedin className="w-5 h-5" />, href: "#", label: "LinkedIn" },
   ]
 
   const quickLinks = [
@@ -91,28 +128,71 @@ export default function Footer() {
 
               {/* Contact Info */}
               <div className="space-y-3 mb-6">
-                <div className="flex items-center space-x-3">
-                  <Mail className="w-4 h-4 text-houtcore-gold flex-shrink-0" />
-                  <a
-                    href="mailto:info@houtcore.nl"
-                    className="text-gray-300 hover:text-houtcore-gold transition-colors duration-300"
-                  >
-                    info@houtcore.nl
-                  </a>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="w-4 h-4 text-houtcore-gold flex-shrink-0" />
-                  <a
-                    href="tel:+31612345678"
-                    className="text-gray-300 hover:text-houtcore-gold transition-colors duration-300"
-                  >
-                    +31 6 12345678
-                  </a>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <MapPin className="w-4 h-4 text-houtcore-gold flex-shrink-0" />
-                  <span className="text-gray-300">Nederland</span>
-                </div>
+                {contactInfo.length > 0 ? (
+                  // Render dynamic contact info from API
+                  contactInfo.map((info) => {
+                    const IconComponent = dynamicIconComponent(info.icon_name)
+                    
+                    return (
+                      <div key={info.id} className={`flex ${info.title === 'Adres' ? 'items-start' : 'items-center'} space-x-3`}>
+                        {IconComponent && <IconComponent className={`w-4 h-4 text-houtcore-gold flex-shrink-0 ${info.title === 'Adres' ? 'mt-1' : ''}`} />}
+                        {info.title === 'E-mail' ? (
+                          <a
+                            href={`mailto:${info.value}`}
+                            className="text-gray-300 hover:text-houtcore-gold transition-colors duration-300"
+                          >
+                            {info.value}
+                          </a>
+                        ) : info.title === 'Telefoon' ? (
+                          <a
+                            href={`tel:${info.value.replace(/\s+/g, '')}`}
+                            className="text-gray-300 hover:text-houtcore-gold transition-colors duration-300"
+                          >
+                            {info.value}
+                          </a>
+                        ) : info.title === 'Adres' ? (
+                          <div className="text-gray-300">
+                            {info.value.split(',').map((line, idx) => (
+                              <div key={idx} className="leading-relaxed">{line.trim()}</div>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-gray-300">{info.value}</span>
+                        )}
+                      </div>
+                    )
+                  })
+                ) : (
+                  // Fallback static content if API fails or is still loading
+                  <>
+                    <div className="flex items-center space-x-3">
+                      <Mail className="w-4 h-4 text-houtcore-gold flex-shrink-0" />
+                      <a
+                        href="mailto:info@houtcore.nl"
+                        className="text-gray-300 hover:text-houtcore-gold transition-colors duration-300"
+                      >
+                        info@houtcore.nl
+                      </a>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <Phone className="w-4 h-4 text-houtcore-gold flex-shrink-0" />
+                      <a
+                        href="tel:+31612345678"
+                        className="text-gray-300 hover:text-houtcore-gold transition-colors duration-300"
+                      >
+                        +31 6 12345678
+                      </a>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <MapPin className="w-4 h-4 text-houtcore-gold flex-shrink-0 mt-1" />
+                      <div className="text-gray-300">
+                        <div>Haimersweg 210</div>
+                        <div>7547RR, Enschede</div>
+                        <div>Nederland</div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* Social Links */}

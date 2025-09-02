@@ -74,7 +74,7 @@ export default function LandingSection() {
           className="object-cover"
           style={{ objectPosition: "center center" }}
         />
-        {/* Rich gradient overlay using Tailwind classes */}
+        {/* Rich gradient overlay instead of flat shadow */}
         <div className="absolute inset-0 bg-gradient-to-b from-houtcore-charcoal/30 via-houtcore-charcoal/50 to-houtcore-charcoal/80" />
         <div className="absolute inset-0 bg-gradient-to-r from-houtcore-brown/30 via-transparent to-houtcore-brown/30" />
         
@@ -164,13 +164,13 @@ export default function LandingSection() {
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="text-center"
             >
-              {/* Logo with much larger size */}
-              <div className="mx-auto" style={{ maxWidth: "750px", maxHeight: "500px" }}>
+              {/* Logo with proper sizing constraints */}
+              <div className="mx-auto" style={{ maxWidth: "350px", maxHeight: "200px" }}>
                 <Image
                   src="/logo.png"
                   alt="Houtcore Logo"
-                  width={750}
-                  height={375}
+                  width={350}
+                  height={175}
                   className="w-auto h-auto object-contain drop-shadow-xl"
                 />
               </div>
@@ -187,7 +187,7 @@ export default function LandingSection() {
                   transition={{ delay: 0.8, duration: 1 }}
                   className="text-houtcore-gold text-xl md:text-2xl font-light tracking-wider"
                 >
-                  
+                  Premium Woodworking
                 </motion.h2>
               </motion.div>
             </motion.div>
