@@ -1,0 +1,26 @@
+[Unit]
+Description=Houtcore Website Services
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=esocode
+Group=esocode
+WorkingDirectory=/media/esocode/ssd/Projects/houtcore-website
+ExecStart=/media/esocode/ssd/Projects/houtcore-website/start-services.sh production
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables
+Environment=NODE_ENV=production
+Environment=DJANGO_SETTINGS_MODULE=houtcore.settings
+
+# Give the service time to start
+TimeoutStartSec=60
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

@@ -44,6 +44,12 @@ uv run python manage.py create_sample_contact
 echo "📁 Collecting static files..."
 uv run python manage.py collectstatic --noinput
 
+echo "🎨 Checking static files configuration..."
+uv run python manage.py findstatic admin/css/base.css --verbosity=2
+
+echo "🔧 Running system check..."
+uv run python manage.py check
+
 echo "✅ Deployment complete!"
 echo ""
 echo "🎉 Your Houtcore backend is ready!"

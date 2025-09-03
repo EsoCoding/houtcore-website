@@ -23,9 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-k7yscp4vy6)9jhelde6h9z^505sms9=m0k#t*3$fgz-iil8yij'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True  # Set to True for development to serve media files properly
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'login.houtcore.nl',
+    'houtcore.nl',
+    'www.houtcore.nl',
+]
 
 
 # Application definition
@@ -43,6 +49,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
+    'django_ckeditor_5',
     
     # Local apps
     'portfolio',
